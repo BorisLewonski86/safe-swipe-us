@@ -275,7 +275,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center">
-              <img src={logo} alt="Flitch" className="h-10 w-auto" />
+              <img src={logo} alt="Flitch" className="h-14 w-auto" />
             </div>
             
             <nav className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
