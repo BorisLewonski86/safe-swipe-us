@@ -59,7 +59,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-background/20 backdrop-blur-lg text-background px-4 py-2 rounded-full mb-6 border border-background/20">
               <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">Real people. Real vibes. Real matches.</span>
+              <span className="text-sm font-medium">Real people. Real vibes. Real connections.</span>
             </div>
 
             {/* Headline */}
