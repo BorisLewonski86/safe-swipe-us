@@ -36,17 +36,17 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
     const newSwipeCount = swipeCount + 1;
     setSwipeCount(newSwipeCount);
 
-    // Show verification modal after 3 swipes for non-logged users
-    if (!isLoggedIn && newSwipeCount >= 3) {
-      setShowWhatsAppModal(true);
-      return;
-    }
+    // Move to next profile first
+    setCurrentIndex(prev => prev + 1);
 
     if (direction === "right" && isLoggedIn) {
       toast.success(`You liked ${currentProfile.name}!`);
     }
 
-    setCurrentIndex(prev => prev + 1);
+    // Show verification modal after 3 swipes for non-logged users
+    if (!isLoggedIn && newSwipeCount >= 3) {
+      setShowWhatsAppModal(true);
+    }
   };
 
   const handleUnlock = () => {
