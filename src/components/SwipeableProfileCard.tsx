@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, useMotionValue, useTransform, PanInfo, AnimatePresence } from "framer-motion";
-import { Heart, X, Lock, MapPin, Verified, ChevronLeft, ChevronRight } from "lucide-react";
+import { Heart, X, Lock, MapPin, Verified, ChevronLeft, ChevronRight, Camera } from "lucide-react";
 import { Profile } from "@/data/profiles";
 
 interface SwipeableProfileCardProps {
@@ -112,9 +112,9 @@ export function SwipeableProfileCard({
               onClick={handlePhotoIndicatorClick}
               className="absolute top-3 right-3 flex items-center gap-1.5 bg-foreground/60 backdrop-blur-sm px-2.5 py-1 rounded-full hover:bg-foreground/70 transition-colors"
             >
-              <Lock className="w-3 h-3 text-background" />
+              <Camera className="w-3.5 h-3.5 text-background" />
               <span className="text-xs text-background font-medium">
-                1/{profile.photos.length}
+                +{profile.photos.length - 1} pics
               </span>
             </button>
           )}
