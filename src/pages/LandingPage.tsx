@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { MessageCircle, Shield, Heart, Users, CheckCircle, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import heroBg from "@/assets/hero-bg.jpg";
+import shadowMask from "@/assets/shadow-mask.png";
+import noiseTexture from "@/assets/noise-texture.png";
 
 interface LandingPageProps {
   onGetStarted: () => void;
@@ -39,14 +40,36 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src={heroBg}
-            alt="Romantic sunset"
-            className="w-full h-full object-cover"
+        {/* Ethereal Shadow Background */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Base shadow layer with mask */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundColor: 'rgb(128, 128, 128)',
+              maskImage: `url(${shadowMask})`,
+              WebkitMaskImage: `url(${shadowMask})`,
+              maskSize: 'cover',
+              WebkitMaskSize: 'cover',
+              maskRepeat: 'no-repeat',
+              WebkitMaskRepeat: 'no-repeat',
+              maskPosition: 'center center',
+              WebkitMaskPosition: 'center center',
+              filter: 'blur(4px)',
+            }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-foreground/40 via-foreground/20 to-background" />
+          {/* Noise texture overlay */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url(${noiseTexture})`,
+              backgroundSize: '240px',
+              backgroundRepeat: 'repeat',
+              opacity: 0.5,
+            }}
+          />
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-background/60" />
         </div>
 
         {/* Content */}
@@ -57,21 +80,21 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             transition={{ duration: 0.6 }}
           >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-background/20 backdrop-blur-lg text-background px-4 py-2 rounded-full mb-6 border border-background/20">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-lg text-white px-4 py-2 rounded-full mb-6 border border-white/20">
               <Sparkles className="w-4 h-4" />
               <span className="text-sm font-medium">Real people. Real vibes. Real connections.</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-background mb-4 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
               Meet real people near you —{" "}
-              <span className="bg-gradient-to-r from-coral-light to-purple-light bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-300 to-gray-500 bg-clip-text text-transparent">
                 verified with WhatsApp
               </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg sm:text-xl text-background/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
               See one photo for free. Unlock full profiles, likes and matches after quick WhatsApp verification.
             </p>
 
@@ -95,7 +118,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </div>
 
             {/* Trust indicators */}
-            <div className="flex flex-wrap justify-center gap-6 text-background/80">
+            <div className="flex flex-wrap justify-center gap-6 text-gray-500">
               {[
                 { icon: CheckCircle, text: "Real users only" },
                 { icon: Shield, text: "WhatsApp verified" },
@@ -116,8 +139,8 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <div className="w-6 h-10 rounded-full border-2 border-background/50 flex items-start justify-center p-2">
-            <div className="w-1.5 h-2.5 bg-background/50 rounded-full" />
+          <div className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2">
+            <div className="w-1.5 h-2.5 bg-white/30 rounded-full" />
           </div>
         </motion.div>
       </section>

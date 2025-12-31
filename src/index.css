@@ -6,102 +6,102 @@
 
 @layer base {
   :root {
-    /* Dark luxurious palette - black silk with gold accents */
+    /* Dark luxurious palette - black silk with silver accents */
     --background: 0 0% 4%;
-    --foreground: 40 20% 95%;
+    --foreground: 0 0% 95%;
 
     --card: 0 0% 8%;
-    --card-foreground: 40 20% 95%;
+    --card-foreground: 0 0% 95%;
 
     --popover: 0 0% 8%;
-    --popover-foreground: 40 20% 95%;
+    --popover-foreground: 0 0% 95%;
 
-    /* Gold primary - luxurious, warm, elegant */
-    --primary: 42 85% 55%;
+    /* Silver primary - cool, elegant, modern */
+    --primary: 0 0% 75%;
     --primary-foreground: 0 0% 5%;
 
-    /* Rose gold secondary - romantic, sensual */
-    --secondary: 350 60% 55%;
+    /* Cool silver secondary */
+    --secondary: 220 10% 50%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 12%;
     --muted-foreground: 0 0% 55%;
 
-    --accent: 42 50% 15%;
-    --accent-foreground: 42 85% 65%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 85%;
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;
+    --border: 0 0% 18%;
     --input: 0 0% 15%;
-    --ring: 42 85% 55%;
+    --ring: 0 0% 75%;
 
     --radius: 1rem;
 
-    /* Custom Flitch tokens */
-    --gold: 42 85% 55%;
-    --gold-light: 42 100% 70%;
-    --gold-dark: 42 75% 40%;
+    /* Custom Flitch tokens - Silver palette */
+    --silver: 0 0% 75%;
+    --silver-light: 0 0% 85%;
+    --silver-dark: 0 0% 55%;
     
-    --rose: 350 60% 55%;
-    --rose-light: 350 60% 70%;
-    --rose-dark: 350 60% 40%;
+    --steel: 220 10% 50%;
+    --steel-light: 220 10% 65%;
+    --steel-dark: 220 10% 35%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(42 85% 55%) 0%, hsl(350 60% 55%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 80%) 0%, hsl(220 10% 55%) 100%);
     --gradient-card: linear-gradient(180deg, transparent 0%, hsla(0 0% 0% / 0.8) 100%);
     --gradient-blur: linear-gradient(180deg, hsla(0 0% 100% / 0.05) 0%, hsla(0 0% 100% / 0.1) 100%);
 
     --shadow-soft: 0 4px 20px hsla(0 0% 0% / 0.3);
     --shadow-card: 0 8px 32px hsla(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 40px hsla(42 85% 55% / 0.25);
+    --shadow-glow: 0 0 40px hsla(0 0% 75% / 0.2);
 
     --sidebar-background: 0 0% 6%;
-    --sidebar-foreground: 40 20% 90%;
-    --sidebar-primary: 42 85% 55%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 0 0% 75%;
     --sidebar-primary-foreground: 0 0% 5%;
     --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 40 20% 95%;
+    --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 42 85% 55%;
+    --sidebar-ring: 0 0% 75%;
   }
 
   .dark {
     --background: 0 0% 2%;
-    --foreground: 40 20% 95%;
+    --foreground: 0 0% 95%;
 
     --card: 0 0% 6%;
-    --card-foreground: 40 20% 95%;
+    --card-foreground: 0 0% 95%;
 
     --popover: 0 0% 6%;
-    --popover-foreground: 40 20% 95%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 42 85% 55%;
+    --primary: 0 0% 80%;
     --primary-foreground: 0 0% 5%;
 
-    --secondary: 350 60% 55%;
+    --secondary: 220 10% 55%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 10%;
     --muted-foreground: 0 0% 50%;
 
-    --accent: 42 50% 12%;
-    --accent-foreground: 42 85% 70%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 90%;
 
     --destructive: 0 70% 45%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 12%;
     --input: 0 0% 12%;
-    --ring: 42 85% 55%;
+    --ring: 0 0% 80%;
 
-    --gold: 42 85% 60%;
-    --gold-light: 42 50% 25%;
-    --gold-dark: 42 75% 50%;
+    --silver: 0 0% 80%;
+    --silver-light: 0 0% 30%;
+    --silver-dark: 0 0% 60%;
     
-    --rose: 350 60% 60%;
-    --rose-light: 350 40% 25%;
-    --rose-dark: 350 60% 50%;
+    --steel: 220 10% 55%;
+    --steel-light: 220 10% 30%;
+    --steel-dark: 220 10% 45%;
   }
 }
 
