@@ -19,6 +19,7 @@ interface BrowsePageProps {
 export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
   const [selectedGender, setSelectedGender] = useState<"male" | "female" | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [swipeCount, setSwipeCount] = useState(0);
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
   const navigate = useNavigate();
 
@@ -32,12 +33,16 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
   const isFinished = currentIndex >= filteredProfiles.length;
 
   const handleSwipe = (direction: "left" | "right") => {
-    if (!isLoggedIn && direction === "right") {
+    const newSwipeCount = swipeCount + 1;
+    setSwipeCount(newSwipeCount);
+
+    // Show verification modal after 3 swipes for non-logged users
+    if (!isLoggedIn && newSwipeCount >= 3) {
       setShowWhatsAppModal(true);
       return;
     }
 
-    if (direction === "right") {
+    if (direction === "right" && isLoggedIn) {
       toast.success(`You liked ${currentProfile.name}!`);
     }
 
@@ -135,7 +140,7 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
                 </div>
 
                 {/* Cards stack */}
-                <div className="relative h-[500px]">
+                <div className="relative h-[420px]">
                   {filteredProfiles.slice(currentIndex, currentIndex + 3).map((profile, idx) => (
                     <SwipeableProfileCard
                       key={profile.id}
