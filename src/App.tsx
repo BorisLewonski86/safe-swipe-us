@@ -10,6 +10,8 @@ import AuthPage from "./pages/AuthPage";
 import MatchesPage from "./pages/MatchesPage";
 import ChatPage from "./pages/ChatPage";
 import AccountPage from "./pages/AccountPage";
+import AboutPage from "./pages/AboutPage";
+import SafetyPage from "./pages/SafetyPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +44,8 @@ const App = () => {
             <Route path="/matches" element={<MatchesPage isLoggedIn={isLoggedIn} onLogin={handleLogin} />} />
             <Route path="/chat" element={<ChatPage isLoggedIn={isLoggedIn} onLogin={handleLogin} />} />
             <Route path="/account" element={<AccountPage isLoggedIn={isLoggedIn} onLogin={handleLogin} onLogout={handleLogout} />} />
+            <Route path="/about" element={<AboutPage isLoggedIn={isLoggedIn} onLogin={handleLogin} />} />
+            <Route path="/safety" element={<SafetyPage isLoggedIn={isLoggedIn} onLogin={handleLogin} />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

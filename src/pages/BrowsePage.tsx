@@ -1,12 +1,15 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useMemo } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Header } from "@/components/Header";
 import { BottomNav } from "@/components/BottomNav";
-import { ProfileCard } from "@/components/ProfileCard";
+import { GenderSelector } from "@/components/GenderSelector";
+import { SwipeableProfileCard } from "@/components/SwipeableProfileCard";
 import { WhatsAppModal } from "@/components/WhatsAppModal";
 import { mockProfiles } from "@/data/profiles";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { RefreshCw, ArrowLeft } from "lucide-react";
 
 interface BrowsePageProps {
   isLoggedIn: boolean;
@@ -14,42 +17,49 @@ interface BrowsePageProps {
 }
 
 export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
-  const [profiles] = useState(mockProfiles);
+  const [selectedGender, setSelectedGender] = useState<"male" | "female" | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
   const navigate = useNavigate();
 
-  const currentProfile = profiles[currentIndex];
+  // Filter profiles by selected gender and limit to 5
+  const filteredProfiles = useMemo(() => {
+    if (!selectedGender) return [];
+    return mockProfiles.filter(p => p.gender === selectedGender).slice(0, 5);
+  }, [selectedGender]);
 
-  const handleLike = () => {
-    if (!isLoggedIn) {
+  const currentProfile = filteredProfiles[currentIndex];
+  const isFinished = currentIndex >= filteredProfiles.length;
+
+  const handleSwipe = (direction: "left" | "right") => {
+    if (!isLoggedIn && direction === "right") {
       setShowWhatsAppModal(true);
       return;
     }
-    toast.success(`You liked ${currentProfile.name}!`);
-    nextProfile();
-  };
 
-  const handlePass = () => {
-    nextProfile();
+    if (direction === "right") {
+      toast.success(`You liked ${currentProfile.name}!`);
+    }
+
+    setCurrentIndex(prev => prev + 1);
   };
 
   const handleUnlock = () => {
     setShowWhatsAppModal(true);
   };
 
-  const nextProfile = () => {
-    if (currentIndex < profiles.length - 1) {
-      setCurrentIndex(prev => prev + 1);
-    } else {
-      setCurrentIndex(0);
-      toast("You've seen all profiles! Starting over.");
-    }
-  };
-
   const handleWhatsAppContinue = () => {
     setShowWhatsAppModal(false);
     navigate("/auth");
+  };
+
+  const handleReset = () => {
+    setCurrentIndex(0);
+  };
+
+  const handleBack = () => {
+    setSelectedGender(null);
+    setCurrentIndex(0);
   };
 
   return (
@@ -58,32 +68,95 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
       
       <main className="pt-20 pb-24 px-4">
         <div className="max-w-lg mx-auto">
-          {/* Title */}
-          <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-foreground">Discover</h1>
-            <p className="text-sm text-muted-foreground">
-              {isLoggedIn ? "Find your perfect match" : "Preview profiles • Verify to unlock"}
-            </p>
-          </div>
-
-          {/* Profile Cards */}
           <AnimatePresence mode="wait">
-            {currentProfile && (
-              <ProfileCard
-                key={currentProfile.id}
-                profile={currentProfile}
-                onLike={handleLike}
-                onPass={handlePass}
-                onUnlock={handleUnlock}
-                isLoggedIn={isLoggedIn}
-              />
+            {!selectedGender ? (
+              <motion.div
+                key="selector"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="pt-8"
+              >
+                <GenderSelector onSelect={setSelectedGender} />
+              </motion.div>
+            ) : isFinished ? (
+              <motion.div
+                key="finished"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-center pt-20"
+              >
+                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                  <RefreshCw className="w-10 h-10 text-primary" />
+                </div>
+                <h2 className="text-2xl font-bold text-foreground mb-2">
+                  You've seen all profiles!
+                </h2>
+                <p className="text-muted-foreground mb-6">
+                  Come back later for new matches or start over.
+                </p>
+                <div className="flex flex-col gap-3">
+                  <Button variant="hero" size="lg" onClick={handleReset}>
+                    <RefreshCw className="w-4 h-4 mr-2" />
+                    Start Over
+                  </Button>
+                  <Button variant="outline" size="lg" onClick={handleBack}>
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Change Preference
+                  </Button>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="profiles"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                {/* Header with back button */}
+                <div className="flex items-center justify-between mb-4">
+                  <button 
+                    onClick={handleBack}
+                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span className="text-sm">Change</span>
+                  </button>
+                  <div className="text-center">
+                    <h1 className="text-xl font-bold text-foreground">
+                      {selectedGender === "female" ? "Women" : "Men"}
+                    </h1>
+                    <p className="text-xs text-muted-foreground">
+                      {isLoggedIn ? "Find your match" : "Verify to unlock"}
+                    </p>
+                  </div>
+                  <div className="w-16" /> {/* Spacer for centering */}
+                </div>
+
+                {/* Cards stack */}
+                <div className="relative h-[500px]">
+                  {filteredProfiles.slice(currentIndex, currentIndex + 3).map((profile, idx) => (
+                    <SwipeableProfileCard
+                      key={profile.id}
+                      profile={profile}
+                      onSwipe={handleSwipe}
+                      onUnlock={handleUnlock}
+                      isLoggedIn={isLoggedIn}
+                      isTop={idx === 0}
+                    />
+                  ))}
+                </div>
+
+                {/* Counter */}
+                <div className="text-center mt-4">
+                  <span className="text-sm text-muted-foreground">
+                    {currentIndex + 1} of {filteredProfiles.length}
+                  </span>
+                </div>
+              </motion.div>
             )}
           </AnimatePresence>
-
-          {/* Profile counter */}
-          <div className="text-center mt-4 text-sm text-muted-foreground">
-            {currentIndex + 1} of {profiles.length}
-          </div>
         </div>
       </main>
 
