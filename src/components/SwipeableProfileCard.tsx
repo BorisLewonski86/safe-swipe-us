@@ -43,7 +43,13 @@ export function SwipeableProfileCard({
 
   const handlePhotoIndicatorClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (!isLoggedIn && hasMultiplePhotos) {
+    if (hasMultiplePhotos) {
+      setShowGallery(true);
+    }
+  };
+
+  const handlePhotoClick = () => {
+    if (hasMultiplePhotos) {
       setShowGallery(true);
     }
   };
@@ -84,12 +90,17 @@ export function SwipeableProfileCard({
         transition={{ type: "spring", damping: 20, stiffness: 200 }}
       >
         <div className="relative w-full aspect-[3/4] max-h-[420px] rounded-2xl overflow-hidden shadow-card cursor-grab active:cursor-grabbing">
-          {/* Photo */}
-          <img
-            src={profile.photos[0]}
-            alt={profile.name}
-            className="w-full h-full object-cover pointer-events-none"
-          />
+          {/* Photo - clickable to open gallery */}
+          <div 
+            onClick={handlePhotoClick}
+            className={`w-full h-full ${hasMultiplePhotos ? 'cursor-pointer' : ''}`}
+          >
+            <img
+              src={profile.photos[0]}
+              alt={profile.name}
+              className="w-full h-full object-cover pointer-events-none"
+            />
+          </div>
 
           {/* Like/Nope indicators */}
           <motion.div
