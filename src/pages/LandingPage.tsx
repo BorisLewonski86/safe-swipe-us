@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import { MessageCircle, Shield, Heart, Users, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import shadowMask from "@/assets/shadow-mask.png";
-import noiseTexture from "@/assets/noise-texture.png";
 import logo from "@/assets/logo.png";
 
 interface LandingPageProps {
@@ -41,36 +39,34 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Ethereal Shadow Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Base shadow layer with mask */}
+        {/* Soft Gradient Background */}
+        <div className="absolute inset-0">
+          {/* Main gradient - peach to pink to lilac to blue */}
           <div 
             className="absolute inset-0"
             style={{
-              backgroundColor: 'rgb(128, 128, 128)',
-              maskImage: `url(${shadowMask})`,
-              WebkitMaskImage: `url(${shadowMask})`,
-              maskSize: 'cover',
-              WebkitMaskSize: 'cover',
-              maskRepeat: 'no-repeat',
-              WebkitMaskRepeat: 'no-repeat',
-              maskPosition: 'center center',
-              WebkitMaskPosition: 'center center',
-              filter: 'blur(4px)',
+              background: `
+                linear-gradient(135deg, 
+                  hsl(25, 70%, 92%) 0%, 
+                  hsl(340, 60%, 90%) 25%, 
+                  hsl(280, 45%, 92%) 50%, 
+                  hsl(210, 55%, 92%) 75%, 
+                  hsl(25, 65%, 90%) 100%
+                )
+              `,
             }}
           />
-          {/* Noise texture overlay */}
+          {/* Subtle overlay for depth */}
           <div 
             className="absolute inset-0"
             style={{
-              backgroundImage: `url(${noiseTexture})`,
-              backgroundSize: '240px',
-              backgroundRepeat: 'repeat',
-              opacity: 0.5,
+              background: `
+                radial-gradient(ellipse at 30% 20%, hsl(340, 55%, 88%) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, hsl(280, 40%, 90%) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 30%, hsl(210, 50%, 90%) 0%, transparent 40%)
+              `,
             }}
           />
-          {/* Dark overlay for better text readability */}
-          <div className="absolute inset-0 bg-background/60" />
         </div>
 
         {/* Content */}
@@ -81,21 +77,21 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             transition={{ duration: 0.6 }}
           >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-lg text-white px-4 py-2 rounded-full mb-6 border border-white/20">
-              <Heart className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-lg text-gray-700 px-4 py-2 rounded-full mb-6 border border-white/40 shadow-sm">
+              <Heart className="w-4 h-4 text-rose-400" />
               <span className="text-sm font-medium">Real people. Real vibes. Real connections.</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 mb-4 leading-tight">
               Meet real people near you —{" "}
-              <span className="bg-gradient-to-r from-gray-300 to-gray-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
                 verified with WhatsApp
               </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg sm:text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
               See one photo for free. Unlock full profiles, likes and matches after quick WhatsApp verification.
             </p>
 
@@ -119,7 +115,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </div>
 
             {/* Trust indicators */}
-            <div className="flex flex-wrap justify-center gap-6 text-gray-500">
+            <div className="flex flex-wrap justify-center gap-6 text-gray-600">
               {[
                 { icon: CheckCircle, text: "Real users only" },
                 { icon: Shield, text: "WhatsApp verified" },
@@ -140,8 +136,8 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <div className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2">
-            <div className="w-1.5 h-2.5 bg-white/30 rounded-full" />
+          <div className="w-6 h-10 rounded-full border-2 border-gray-400/40 flex items-start justify-center p-2">
+            <div className="w-1.5 h-2.5 bg-gray-400/40 rounded-full" />
           </div>
         </motion.div>
       </section>
