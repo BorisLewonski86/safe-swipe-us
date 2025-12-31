@@ -1,12 +1,42 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { Header } from "@/components/Header";
+import { LandingPage } from "@/pages/LandingPage";
+import { WhatsAppModal } from "@/components/WhatsAppModal";
 
-const Index = () => {
+interface IndexProps {
+  isLoggedIn: boolean;
+  onLogin: () => void;
+}
+
+const Index = ({ isLoggedIn, onLogin }: IndexProps) => {
+  const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    setShowWhatsAppModal(true);
+  };
+
+  const handleWhatsAppContinue = () => {
+    setShowWhatsAppModal(false);
+    navigate("/auth");
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Header isLoggedIn={isLoggedIn} onLogin={handleGetStarted} />
+      <LandingPage onGetStarted={handleGetStarted} />
+      
+      <AnimatePresence>
+        {showWhatsAppModal && (
+          <WhatsAppModal
+            isOpen={showWhatsAppModal}
+            onClose={() => setShowWhatsAppModal(false)}
+            onContinue={handleWhatsAppContinue}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
