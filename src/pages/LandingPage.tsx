@@ -39,31 +39,32 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Soft Gradient Background */}
+        {/* Animated Soft Gradient Background */}
         <div className="absolute inset-0">
-          {/* Main gradient - peach to pink to lilac to blue */}
+          {/* Main animated gradient - peach to pink to lilac */}
           <div 
-            className="absolute inset-0"
+            className="absolute inset-0 animate-gradient-shift"
             style={{
               background: `
                 linear-gradient(135deg, 
                   hsl(25, 70%, 92%) 0%, 
-                  hsl(340, 60%, 90%) 25%, 
-                  hsl(280, 45%, 92%) 50%, 
-                  hsl(210, 55%, 92%) 75%, 
+                  hsl(340, 55%, 90%) 25%, 
+                  hsl(280, 40%, 91%) 50%, 
+                  hsl(210, 50%, 92%) 75%, 
                   hsl(25, 65%, 90%) 100%
                 )
               `,
+              backgroundSize: '400% 400%',
             }}
           />
-          {/* Subtle overlay for depth */}
+          {/* Subtle floating orbs for depth */}
           <div 
-            className="absolute inset-0"
+            className="absolute inset-0 opacity-60"
             style={{
               background: `
-                radial-gradient(ellipse at 30% 20%, hsl(340, 55%, 88%) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, hsl(280, 40%, 90%) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 30%, hsl(210, 50%, 90%) 0%, transparent 40%)
+                radial-gradient(ellipse 80% 50% at 30% 20%, hsl(340, 50%, 88%) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 70% 75%, hsl(280, 35%, 89%) 0%, transparent 45%),
+                radial-gradient(ellipse 50% 50% at 85% 25%, hsl(25, 55%, 90%) 0%, transparent 40%)
               `,
             }}
           />
@@ -191,7 +192,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 className="bg-card rounded-3xl p-8 shadow-soft border border-border hover:shadow-card transition-shadow"
               >
                 <div className="w-14 h-14 rounded-2xl gradient-hero flex items-center justify-center mb-6">
-                  <feature.icon className="w-7 h-7 text-background" />
+                  <feature.icon className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-3">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.description}</p>
@@ -231,7 +232,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <div className="w-12 h-12 rounded-full gradient-hero text-background font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 rounded-full gradient-hero text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
                   {item.step}
                 </div>
                 <h3 className="font-bold text-foreground mb-2">{item.title}</h3>
@@ -249,12 +250,12 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="gradient-hero rounded-3xl p-8 sm:p-12 text-center text-background"
+            className="gradient-hero rounded-3xl p-8 sm:p-12 text-center text-white"
           >
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               Ready to find your match?
             </h2>
-            <p className="text-background/90 mb-8 max-w-xl mx-auto">
+            <p className="text-white/90 mb-8 max-w-xl mx-auto">
               Join over 500,000 verified users and start meeting real people today.
             </p>
             <Button 
