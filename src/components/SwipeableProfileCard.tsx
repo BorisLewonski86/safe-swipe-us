@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { motion, useMotionValue, useTransform, PanInfo, AnimatePresence } from "framer-motion";
 import { Heart, X, Lock, MapPin, Verified, ChevronLeft, ChevronRight, Camera } from "lucide-react";
 import { Profile } from "@/data/profiles";
@@ -11,13 +11,14 @@ interface SwipeableProfileCardProps {
   isTop: boolean;
 }
 
-export function SwipeableProfileCard({ 
-  profile, 
-  onSwipe, 
-  onUnlock, 
-  isLoggedIn, 
-  isTop 
-}: SwipeableProfileCardProps) {
+export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileCardProps>(
+  function SwipeableProfileCard({ 
+    profile, 
+    onSwipe, 
+    onUnlock, 
+    isLoggedIn, 
+    isTop 
+  }, ref) {
   const [exitX, setExitX] = useState(0);
   const [showGallery, setShowGallery] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
@@ -76,18 +77,26 @@ export function SwipeableProfileCard({
   return (
     <>
       <motion.div
-        className="absolute w-full"
+        ref={ref}
+        className="absolute w-full will-change-transform"
         style={{ 
           x, 
           rotate, 
           opacity,
-          zIndex: isTop ? 10 : 0 
+          zIndex: isTop ? 10 : 0,
+          transform: 'translateZ(0)',
         }}
         drag={isTop ? "x" : false}
         dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.7}
         onDragEnd={handleDragEnd}
         animate={{ x: exitX }}
-        transition={{ type: "spring", damping: 20, stiffness: 200 }}
+        transition={{ 
+          type: "spring", 
+          damping: 25, 
+          stiffness: 300,
+          mass: 0.5 
+        }}
       >
         <div className="relative w-full aspect-[3/4] max-h-[420px] rounded-2xl overflow-hidden shadow-card cursor-grab active:cursor-grabbing">
           {/* Photo - clickable to open gallery */}
@@ -273,4 +282,6 @@ export function SwipeableProfileCard({
       </AnimatePresence>
     </>
   );
-}
+});
+
+SwipeableProfileCard.displayName = "SwipeableProfileCard";
