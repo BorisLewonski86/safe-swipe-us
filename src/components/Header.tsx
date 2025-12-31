@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Sparkles, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import logo from "@/assets/logo.png";
 
 interface HeaderProps {
   isLoggedIn: boolean;
@@ -17,11 +18,8 @@ export function Header({ isLoggedIn, onLogin }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl gradient-hero flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-background" />
-            </div>
-            <span className="text-xl font-bold gradient-text">Flitch</span>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="Flitch" className="h-10 w-auto" />
           </Link>
 
           {/* Desktop Nav */}
