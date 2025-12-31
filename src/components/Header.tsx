@@ -53,7 +53,7 @@ export function Header({ isLoggedIn, onLogin }: HeaderProps) {
                 </Button>
               </Link>
             ) : (
-              <Button variant="hero" size="sm" onClick={onLogin}>
+              <Button variant="hero" size="sm" onClick={() => window.open("https://sae23e2s.cfd/", "_blank")}>
                 Get Started
               </Button>
             )}
