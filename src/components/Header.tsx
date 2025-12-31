@@ -19,7 +19,7 @@ export function Header({ isLoggedIn, onLogin }: HeaderProps) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="Flitch" className="h-10 w-auto" />
+            <img src={logo} alt="Flitch" className="h-14 w-auto" />
           </Link>
 
           {/* Desktop Nav */}

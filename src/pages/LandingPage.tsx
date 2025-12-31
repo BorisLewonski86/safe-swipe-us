@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Shield, Heart, Users, CheckCircle, Sparkles } from "lucide-react";
+import { MessageCircle, Shield, Heart, Users, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import shadowMask from "@/assets/shadow-mask.png";
 import noiseTexture from "@/assets/noise-texture.png";
+import logo from "@/assets/logo.png";
 
 interface LandingPageProps {
   onGetStarted: () => void;
@@ -81,7 +82,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           >
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-lg text-white px-4 py-2 rounded-full mb-6 border border-white/20">
-              <Sparkles className="w-4 h-4" />
+              <Heart className="w-4 h-4" />
               <span className="text-sm font-medium">Real people. Real vibes. Real connections.</span>
             </div>
 
@@ -276,11 +277,8 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       <footer className="py-12 px-4 border-t border-border">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg gradient-hero flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-background" />
-              </div>
-              <span className="text-lg font-bold">Flitch</span>
+            <div className="flex items-center">
+              <img src={logo} alt="Flitch" className="h-10 w-auto" />
             </div>
             
             <nav className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
