@@ -31,9 +31,9 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
   ];
 
   const stats = [
-    { value: "1M+", label: "Matches Made" },
-    { value: "500K", label: "Verified Users" },
-    { value: "4.8", label: "App Rating" },
+    { value: "🚀", label: "New members join every day" },
+    { value: "🇺🇸", label: "Available across the US" },
+    { value: "⭐", label: "Great feedback from real users" },
   ];
 
   return (
@@ -94,10 +94,10 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
             {/* Subheadline */}
             <p className="text-lg sm:text-xl text-gray-600 mb-2 max-w-2xl mx-auto">
-              No fake profiles. Real people only.
+              No fake profiles. Real people only. Verified via WhatsApp.
             </p>
             <p className="text-sm text-gray-500 mb-8 max-w-2xl mx-auto">
-              See one photo for free. Unlock full profiles after verification.
+              See one photo for free. Verify with WhatsApp so we know you're real.
             </p>
 
             {/* CTA */}
@@ -271,7 +271,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               Ready to find your match?
             </h2>
             <p className="text-white/90 mb-8 max-w-xl mx-auto">
-              Join over 500,000 verified users and start meeting real people today.
+              Join our growing verified community and start meeting real people today.
             </p>
             <Button 
               variant="whatsapp" 
@@ -296,12 +296,10 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             <nav className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
               <Link to="/about" className="hover:text-foreground transition-colors">About</Link>
               <Link to="/safety" className="hover:text-foreground transition-colors">Safety</Link>
-              <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
-              <Link to="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
             </nav>
             
             <p className="text-sm text-muted-foreground">
-              © 2024 Flitch. All rights reserved.
+              © 2026 Flitch. All rights reserved.
             </p>
           </div>
           
