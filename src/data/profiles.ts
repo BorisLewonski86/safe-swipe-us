@@ -11,7 +11,9 @@ export interface Profile {
 }
 
 // Profile data parsed from bio.txt files
-const menProfilesData: { id: number; name: string; age: number; city: string; distance: string; bio: string; photoCount: number; photoExtensions?: string[] }[] = [
+type ProfileData = { id: number; name: string; age: number; city: string; distance: string; bio: string; photoCount: number; photoExtensions?: string[] };
+
+const menProfilesData: ProfileData[] = [
   { id: 1, name: "Tyler", age: 29, city: "Denver", distance: "3 miles away", bio: "Sports fanatic | Gym regular | Craft beer enthusiast", photoCount: 5 },
   { id: 2, name: "Brandon", age: 35, city: "Seattle", distance: "4 miles away", bio: "I travel to Asia once a year | Foodie at heart | Love photography", photoCount: 5 },
   { id: 3, name: "Ryan", age: 30, city: "Miami", distance: "2 miles away", bio: "Pool and gym are my second home | Fitness is my lifestyle", photoCount: 5 },
@@ -44,25 +46,83 @@ const menProfilesData: { id: number; name: string; age: number; city: string; di
   { id: 30, name: "Victor", age: 30, city: "Ontario", distance: "5 miles away", bio: "I work in cybersecurity | Protecting data by day, exploring life by night | Tech nerd with a sense of humor", photoCount: 3, photoExtensions: ["jpg", "jpg", "png"] },
 ];
 
+const womenProfilesData: ProfileData[] = [
+  { id: 1, name: "Kim", age: 27, city: "Irvine", distance: "3 miles away", bio: "Minimalist wardrobe | Long swims | Days of deep concentration | Calm atmosphere", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 2, name: "Victoria", age: 26, city: "Greenwich", distance: "4 miles away", bio: "Tennis mornings | Neutral tones | Thoughtful rituals | Quiet luxury", photoCount: 8, photoExtensions: ["png", "png", "png", "png", "png", "png", "png", "png"] },
+  { id: 3, name: "Sophia", age: 25, city: "Los Angeles", distance: "2 miles away", bio: "Art curator | Yoga enthusiast | Wine lover", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 4, name: "Olivia", age: 24, city: "New York", distance: "3 miles away", bio: "Fashion designer | Coffee addict | City explorer", photoCount: 7, photoExtensions: ["png", "png", "png", "png", "png", "png", "png"] },
+  { id: 5, name: "Ava", age: 26, city: "Miami", distance: "4 miles away", bio: "Beach lover | Sunset chaser | Free spirit", photoCount: 7, photoExtensions: ["png", "png", "png", "png", "png", "png", "png"] },
+  { id: 6, name: "Isabella", age: 27, city: "San Francisco", distance: "3 miles away", bio: "Tech professional | Hiking weekends | Foodie", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 7, name: "Mia", age: 23, city: "Austin", distance: "2 miles away", bio: "Music lover | Live concerts | Spontaneous adventures", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 8, name: "Charlotte", age: 28, city: "Boston", distance: "5 miles away", bio: "Medical student | Book lover | Cozy evenings", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 9, name: "Amelia", age: 25, city: "Seattle", distance: "3 miles away", bio: "Coffee enthusiast | Rainy day walks | Creative soul", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 10, name: "Brianna", age: 26, city: "Tampa", distance: "4 miles away", bio: "Beach mornings | Strength training | Smoothie bowls | Calm and warmth", photoCount: 7, photoExtensions: ["png", "png", "png", "png", "png", "png", "png"] },
+  { id: 11, name: "Brooklyn", age: 25, city: "Brooklyn", distance: "2 miles away", bio: "People watching | Thrift store jackets | Voice memos instead of text messages | Urban rhythm", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 12, name: "Camila", age: 24, city: "Miami", distance: "3 miles away", bio: "Spanish playlists | Sunset swims | Game breaks | Relaxed rhythm", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 13, name: "Claire", age: 27, city: "Pasadena", distance: "4 miles away", bio: "Morning journaling | Farmers' markets | French films | Mindful living", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 14, name: "Delilah", age: 26, city: "Nashville", distance: "3 miles away", bio: "Live music nights | Vintage jeans | Journaling before bed | Finding joy in the little things", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 15, name: "Emily", age: 25, city: "Madison", distance: "5 miles away", bio: "Lake runs | Simple cooking | Audiobooks | Gentle humor", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 16, name: "Emma", age: 27, city: "Palo Alto", distance: "3 miles away", bio: "Long walks after work | Clean aesthetics | A curious mind | Relaxed ride", photoCount: 7, photoExtensions: ["png", "png", "png", "png", "png", "png", "png"] },
+  { id: 17, name: "Everly", age: 24, city: "San Diego", distance: "2 miles away", bio: "Sunrise swims | Oat milk lattes | Beach walks listening to podcasts | Quiet but curious", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 18, name: "Ivy", age: 27, city: "Boston", distance: "4 miles away", bio: "Bookstores and rainy days | Morning Pilates classes | Learning Italian | Quiet confidence", photoCount: 4, photoExtensions: ["png", "png", "png", "png"] },
+  { id: 19, name: "Kennedy", age: 28, city: "Chicago", distance: "3 miles away", bio: "Long walks by the lake | Wine tastings | Interior Design | Thoughtful Conversations", photoCount: 3, photoExtensions: ["png", "png", "png"] },
+  { id: 20, name: "Luna", age: 23, city: "Santa Cruz", distance: "5 miles away", bio: "Moon phases | Night swims | Analog photography | Free spirit", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 21, name: "Madison", age: 26, city: "Denver", distance: "3 miles away", bio: "Mountain hikes | Craft cocktails | Weekend adventures", photoCount: 7, photoExtensions: ["png", "png", "png", "png", "png", "png", "png"] },
+  { id: 22, name: "Natalie", age: 25, city: "Portland", distance: "4 miles away", bio: "Plant mom | Indie music | Vintage finds", photoCount: 7, photoExtensions: ["jpg", "jpg", "jpg", "jpg", "jpg", "jpg", "jpg"] },
+  { id: 23, name: "Grace", age: 27, city: "San Diego", distance: "2 miles away", bio: "Ocean lover | Morning yoga | Good vibes only", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 24, name: "Harper", age: 24, city: "Atlanta", distance: "3 miles away", bio: "Brunch enthusiast | Art galleries | City nights", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 25, name: "Lily", age: 26, city: "Phoenix", distance: "5 miles away", bio: "Desert sunsets | Road trips | Dog mom", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 26, name: "Zoe", age: 23, city: "Dallas", distance: "3 miles away", bio: "Fitness lover | Smoothie queen | Positive energy", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 27, name: "Chloe", age: 25, city: "Houston", distance: "4 miles away", bio: "BBQ connoisseur | Country music | Southern charm", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 28, name: "Ella", age: 27, city: "Philadelphia", distance: "3 miles away", bio: "History buff | Coffee shops | Autumn walks", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 29, name: "Scarlett", age: 24, city: "Las Vegas", distance: "2 miles away", bio: "Night owl | Pool days | Adventure seeker", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 30, name: "Aria", age: 26, city: "Minneapolis", distance: "4 miles away", bio: "Lake life | Winter sports | Cozy cabin vibes", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 31, name: "Penelope", age: 25, city: "Nashville", distance: "3 miles away", bio: "Songwriter | Guitar nights | Dreamer", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 32, name: "Layla", age: 27, city: "San Jose", distance: "5 miles away", bio: "Tech enthusiast | Hiking trails | Wine country weekends", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 33, name: "Riley", age: 23, city: "Orlando", distance: "3 miles away", bio: "Theme park lover | Sunshine state | Making memories", photoCount: 7, photoExtensions: ["png", "png", "png", "png", "png", "png", "png"] },
+  { id: 34, name: "Nora", age: 26, city: "Charlotte", distance: "4 miles away", bio: "Southern belle | Sweet tea | Front porch evenings", photoCount: 4, photoExtensions: ["png", "png", "png", "png"] },
+  { id: 35, name: "Hazel", age: 24, city: "Salt Lake City", distance: "3 miles away", bio: "Ski season | Mountain views | Active lifestyle", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+  { id: 36, name: "Aurora", age: 27, city: "Portland", distance: "2 miles away", bio: "Coffee culture | Bookworm | Rainy day romance", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 37, name: "Savannah", age: 25, city: "Savannah", distance: "4 miles away", bio: "Historic walks | Sweet treats | Southern hospitality", photoCount: 7, photoExtensions: ["png", "png", "png", "png", "png", "png", "png"] },
+  { id: 38, name: "Audrey", age: 26, city: "Chicago", distance: "3 miles away", bio: "Architecture lover | Jazz nights | Lakefront runs", photoCount: 7, photoExtensions: ["png", "png", "png", "png", "png", "png", "png"] },
+  { id: 39, name: "Stella", age: 24, city: "Miami", distance: "2 miles away", bio: "Beach babe | Salsa dancing | Cuban coffee", photoCount: 6, photoExtensions: ["png", "png", "png", "png", "png", "png"] },
+  { id: 40, name: "Willow", age: 25, city: "Boulder", distance: "4 miles away", bio: "Sunrise Trail Runs | Herbal Teas | Conscious Living | Mountain Soul", photoCount: 5, photoExtensions: ["png", "png", "png", "png", "png"] },
+];
+
 // Generate photos array for each profile
-function getPhotos(id: number, count: number, extensions?: string[]): string[] {
+function getPhotos(id: number, count: number, gender: "male" | "female", extensions?: string[]): string[] {
   const photos: string[] = [];
+  const folder = gender === "male" ? "men" : "women";
   for (let i = 1; i <= count; i++) {
     const ext = extensions ? extensions[i - 1] : "jpg";
-    photos.push(`/profiles/men/${id}/${i}.${ext}`);
+    photos.push(`/profiles/${folder}/${id}/${i}.${ext}`);
   }
   return photos;
 }
 
 // Generate profiles from data
-export const mockProfiles: Profile[] = menProfilesData.map(data => ({
-  id: data.id.toString(),
+const maleProfiles: Profile[] = menProfilesData.map(data => ({
+  id: `m${data.id}`,
   name: data.name,
   age: data.age,
   city: data.city,
   bio: data.bio,
-  photos: getPhotos(data.id, data.photoCount, data.photoExtensions),
-  verified: Math.random() > 0.3, // Random verification status
+  photos: getPhotos(data.id, data.photoCount, "male", data.photoExtensions),
+  verified: Math.random() > 0.3,
   distance: data.distance,
   gender: "male" as const,
 }));
+
+const femaleProfiles: Profile[] = womenProfilesData.map(data => ({
+  id: `f${data.id}`,
+  name: data.name,
+  age: data.age,
+  city: data.city,
+  bio: data.bio,
+  photos: getPhotos(data.id, data.photoCount, "female", data.photoExtensions),
+  verified: Math.random() > 0.3,
+  distance: data.distance,
+  gender: "female" as const,
+}));
+
+export const mockProfiles: Profile[] = [...maleProfiles, ...femaleProfiles];
