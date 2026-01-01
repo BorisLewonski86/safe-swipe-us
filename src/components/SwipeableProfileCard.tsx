@@ -107,6 +107,8 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
             <img
               src={profile.photos[0]}
               alt={profile.name}
+              loading="eager"
+              decoding="async"
               className="w-full h-full object-cover pointer-events-none"
             />
           </div>
@@ -202,6 +204,8 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
               <img
                 src={profile.photos[currentPhotoIndex]}
                 alt={`${profile.name} photo ${currentPhotoIndex + 1}`}
+                loading="lazy"
+                decoding="async"
                 className={`w-full h-full object-cover ${
                   !isLoggedIn && currentPhotoIndex > 0 ? "blur-xl scale-110" : ""
                 }`}
