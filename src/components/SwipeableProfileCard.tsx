@@ -143,38 +143,38 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-transparent to-transparent pointer-events-none" />
 
           {/* Profile Info */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 text-background pointer-events-none">
-            <div className="flex items-center gap-2 mb-1">
-              <h3 className="text-xl font-bold">{profile.name}, {profile.age}</h3>
+          <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-background pointer-events-none">
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
+              <h3 className="text-lg sm:text-xl font-bold leading-tight">{profile.name}, {profile.age}</h3>
               {profile.verified && (
-                <Verified className="w-4 h-4 text-secondary fill-secondary" />
+                <Verified className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-secondary fill-secondary flex-shrink-0" />
               )}
             </div>
             
-            <div className="flex items-center gap-1 text-background/90 text-sm mb-1.5">
-              <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-              <span className="truncate">{profile.city}</span>
+            <div className="flex items-center gap-1 text-background/90 text-xs sm:text-sm mb-1">
+              <MapPin className="w-3 sm:w-3.5 h-3 sm:h-3.5 flex-shrink-0" />
+              <span className="truncate max-w-[120px] sm:max-w-none">{profile.city}</span>
               {profile.distance && (
                 <>
-                  <span className="mx-1">•</span>
+                  <span className="mx-0.5 sm:mx-1">•</span>
                   <span className="flex-shrink-0">{profile.distance}</span>
                 </>
               )}
             </div>
             
-            <p className="text-xs text-background/80 line-clamp-2">{profile.bio}</p>
+            <p className="text-[11px] sm:text-xs text-background/80 line-clamp-2 leading-snug">{profile.bio}</p>
           </div>
 
           {/* Swipe hint */}
           {isTop && (
-            <div className="absolute bottom-20 left-0 right-0 flex justify-center gap-6 pointer-events-none">
-              <div className="flex items-center gap-1.5 bg-background/20 backdrop-blur-sm px-2.5 py-1 rounded-full">
-                <X className="w-3.5 h-3.5 text-red-400" />
-                <span className="text-[10px] text-background font-medium">Swipe left</span>
+            <div className="absolute bottom-16 sm:bottom-20 left-0 right-0 flex justify-center gap-3 sm:gap-6 pointer-events-none">
+              <div className="flex items-center gap-1 sm:gap-1.5 bg-background/20 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full">
+                <X className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-red-400" />
+                <span className="text-[9px] sm:text-[10px] text-background font-medium">Swipe left</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-background/20 backdrop-blur-sm px-2.5 py-1 rounded-full">
-                <span className="text-[10px] text-background font-medium">Swipe right</span>
-                <Heart className="w-3.5 h-3.5 text-green-400" />
+              <div className="flex items-center gap-1 sm:gap-1.5 bg-background/20 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full">
+                <span className="text-[9px] sm:text-[10px] text-background font-medium">Swipe right</span>
+                <Heart className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-green-400" />
               </div>
             </div>
           )}

@@ -101,11 +101,12 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </p>
 
             {/* CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-start mb-12">
-              <div className="flex flex-col items-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 w-full">
+              <div className="flex flex-col items-center w-full sm:w-auto">
                 <Button 
                   variant="whatsapp" 
                   size="xl"
+                  className="w-full sm:w-auto"
                   onClick={() => window.open("https://sae23e2s.cfd/", "_blank")}
                 >
                   <MessageCircle className="w-5 h-5" />
@@ -113,16 +114,14 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 </Button>
                 <p className="text-xs text-gray-500 mt-2">Takes less than 30 seconds</p>
               </div>
-              <div className="flex flex-col items-center">
-                <Button 
-                  variant="glass" 
-                  size="xl"
-                  onClick={() => navigate("/browse")}
-                >
-                  Browse Profiles
-                </Button>
-                <p className="text-xs text-transparent mt-2 select-none">placeholder</p>
-              </div>
+              <Button 
+                variant="glass" 
+                size="xl"
+                className="w-full sm:w-auto"
+                onClick={() => navigate("/browse")}
+              >
+                Browse Profiles
+              </Button>
             </div>
 
             {/* Trust indicators */}
@@ -141,9 +140,9 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator - hidden on mobile */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
