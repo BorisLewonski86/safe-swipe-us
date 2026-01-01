@@ -35,7 +35,7 @@ export function MatchesPage({ isLoggedIn, onLogin }: MatchesPageProps) {
             </p>
             <Button variant="hero" size="lg" onClick={onLogin}>
               <MessageCircle className="w-5 h-5" />
-              Continue with WhatsApp
+              Verify with WhatsApp
             </Button>
           </motion.div>
         </main>
