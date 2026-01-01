@@ -140,7 +140,7 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
                 </div>
 
                 {/* Cards stack */}
-                <div className="relative h-[400px]">
+                <div className="relative h-[520px]">
                   {filteredProfiles.slice(currentIndex, currentIndex + 3).map((profile, idx) => (
                     <SwipeableProfileCard
                       key={profile.id}
