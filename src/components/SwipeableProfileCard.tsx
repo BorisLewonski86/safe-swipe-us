@@ -118,7 +118,7 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
               loading="eager"
               decoding="async"
               onLoad={() => setImageLoaded(true)}
-              className={`w-full h-full object-cover pointer-events-none transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              className={`w-full h-full object-cover object-top pointer-events-none transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             />
           </div>
 
