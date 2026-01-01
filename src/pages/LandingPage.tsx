@@ -101,7 +101,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </p>
 
             {/* CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 w-full">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center sm:items-start mb-12 w-full">
               <div className="flex flex-col items-center w-full sm:w-auto">
                 <Button 
                   variant="whatsapp" 
@@ -114,14 +114,17 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 </Button>
                 <p className="text-xs text-gray-500 mt-2">Takes less than 30 seconds</p>
               </div>
-              <Button 
-                variant="glass" 
-                size="xl"
-                className="w-full sm:w-auto"
-                onClick={() => navigate("/browse")}
-              >
-                Browse Profiles
-              </Button>
+              <div className="flex flex-col items-center w-full sm:w-auto">
+                <Button 
+                  variant="glass" 
+                  size="xl"
+                  className="w-full sm:w-auto"
+                  onClick={() => navigate("/browse")}
+                >
+                  Browse Profiles
+                </Button>
+                <p className="text-xs text-transparent mt-2 select-none hidden sm:block" aria-hidden="true">placeholder</p>
+              </div>
             </div>
 
             {/* Trust indicators */}
