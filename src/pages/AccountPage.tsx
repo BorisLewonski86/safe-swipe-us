@@ -1,9 +1,12 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/Header";
 import { BottomNav } from "@/components/BottomNav";
-import { User, Settings, Camera, MapPin, Edit, Shield, Bell, CreditCard, LogOut, ChevronRight, Verified, MessageCircle } from "lucide-react";
+import { User, Camera, Edit, LogOut, ChevronRight, MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 
 interface AccountPageProps {
   isLoggedIn: boolean;
@@ -12,7 +15,23 @@ interface AccountPageProps {
 }
 
 export function AccountPage({ isLoggedIn, onLogin, onLogout }: AccountPageProps) {
-  const navigate = useNavigate();
+  const [showEditProfile, setShowEditProfile] = useState(false);
+  const [profileData, setProfileData] = useState({
+    name: "",
+    age: "",
+    location: "",
+    bio: ""
+  });
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+
+  const handleImageUpload = () => {
+    toast.error("Ошибка x2345: Не удалось загрузить изображение");
+  };
+
+  const handleSaveProfile = () => {
+    setShowEditProfile(false);
+    toast.success("Профиль сохранен!");
+  };
 
   if (!isLoggedIn) {
     return (
@@ -42,14 +61,6 @@ export function AccountPage({ isLoggedIn, onLogin, onLogout }: AccountPageProps)
     );
   }
 
-  const menuItems = [
-    { icon: Edit, label: "Edit Profile", description: "Update your photos and bio" },
-    { icon: Settings, label: "Preferences", description: "Dating preferences & filters" },
-    { icon: Bell, label: "Notifications", description: "Manage your alerts" },
-    { icon: Shield, label: "Privacy & Safety", description: "Block list, privacy settings" },
-    { icon: CreditCard, label: "Premium", description: "Upgrade for more features", badge: "New" },
-  ];
-
   return (
     <div className="min-h-screen bg-muted">
       <Header isLoggedIn={isLoggedIn} onLogin={onLogin} />
@@ -64,74 +75,72 @@ export function AccountPage({ isLoggedIn, onLogin, onLogout }: AccountPageProps)
           >
             <div className="flex items-start gap-4">
               <div className="relative">
-                <img
-                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop"
-                  alt="Your profile"
-                  className="w-20 h-20 rounded-2xl object-cover"
-                />
-                <button className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground shadow-lg">
+                {profileImage ? (
+                  <img
+                    src={profileImage}
+                    alt="Your profile"
+                    className="w-20 h-20 rounded-2xl object-cover"
+                  />
+                ) : (
+                  <div className="w-20 h-20 rounded-2xl bg-muted flex items-center justify-center">
+                    <User className="w-10 h-10 text-muted-foreground" />
+                  </div>
+                )}
+                <button 
+                  onClick={handleImageUpload}
+                  className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground shadow-lg"
+                >
                   <Camera className="w-4 h-4" />
                 </button>
               </div>
               <div className="flex-1">
-                <div className="flex items-center gap-1">
-                  <h2 className="text-xl font-bold text-foreground">Alex, 28</h2>
-                  <Verified className="w-5 h-5 text-secondary fill-secondary" />
-                </div>
-                <div className="flex items-center gap-1 text-muted-foreground text-sm mt-1">
-                  <MapPin className="w-4 h-4" />
-                  <span>Los Angeles, CA</span>
-                </div>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Looking for something real ✨
-                </p>
+                <h2 className="text-xl font-bold text-foreground">
+                  {profileData.name || "New User"}
+                  {profileData.age && `, ${profileData.age}`}
+                </h2>
+                {profileData.location && (
+                  <p className="text-sm text-muted-foreground mt-1">{profileData.location}</p>
+                )}
+                {profileData.bio && (
+                  <p className="text-sm text-muted-foreground mt-2">{profileData.bio}</p>
+                )}
               </div>
             </div>
 
-            {/* Stats */}
+            {/* Stats - all 0 for new user */}
             <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-border">
               <div className="text-center">
-                <p className="text-2xl font-bold gradient-text">12</p>
+                <p className="text-2xl font-bold gradient-text">0</p>
                 <p className="text-xs text-muted-foreground">Matches</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold gradient-text">48</p>
+                <p className="text-2xl font-bold gradient-text">0</p>
                 <p className="text-xs text-muted-foreground">Likes</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold gradient-text">156</p>
+                <p className="text-2xl font-bold gradient-text">0</p>
                 <p className="text-xs text-muted-foreground">Views</p>
               </div>
             </div>
           </motion.div>
 
-          {/* Menu Items */}
+          {/* Menu Items - only Edit Profile and Notifications */}
           <div className="space-y-2">
-            {menuItems.map((item, index) => (
-              <motion.button
-                key={item.label}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="w-full bg-card rounded-2xl p-4 shadow-soft border border-border flex items-center gap-4 hover:shadow-card transition-shadow text-left"
-              >
-                <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
-                  <item.icon className="w-5 h-5 text-foreground" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-medium text-foreground">{item.label}</h3>
-                    {item.badge && (
-                      <span className="text-xs bg-primary text-primary-foreground px-2 py-0.5 rounded-full">
-                        {item.badge}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
-                </div>
-                <ChevronRight className="w-5 h-5 text-muted-foreground" />
-              </motion.button>
-            ))}
+            <motion.button
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              onClick={() => setShowEditProfile(true)}
+              className="w-full bg-card rounded-2xl p-4 shadow-soft border border-border flex items-center gap-4 hover:shadow-card transition-shadow text-left"
+            >
+              <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
+                <Edit className="w-5 h-5 text-foreground" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-medium text-foreground">Edit Profile</h3>
+                <p className="text-sm text-muted-foreground">Update your photos and bio</p>
+              </div>
+              <ChevronRight className="w-5 h-5 text-muted-foreground" />
+            </motion.button>
           </div>
 
           {/* Logout */}
@@ -154,6 +163,83 @@ export function AccountPage({ isLoggedIn, onLogin, onLogout }: AccountPageProps)
       </main>
 
       <BottomNav isLoggedIn={isLoggedIn} />
+
+      {/* Edit Profile Modal */}
+      <AnimatePresence>
+        {showEditProfile && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-foreground/50 z-50 flex items-end sm:items-center justify-center"
+            onClick={() => setShowEditProfile(false)}
+          >
+            <motion.div
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-card w-full sm:max-w-md sm:rounded-2xl rounded-t-3xl p-6 max-h-[90vh] overflow-y-auto"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-foreground">Edit Profile</h2>
+                <button onClick={() => setShowEditProfile(false)}>
+                  <X className="w-6 h-6 text-muted-foreground" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">Name</label>
+                  <Input
+                    value={profileData.name}
+                    onChange={(e) => setProfileData(prev => ({ ...prev, name: e.target.value }))}
+                    placeholder="Your name"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">Age</label>
+                  <Input
+                    type="number"
+                    value={profileData.age}
+                    onChange={(e) => setProfileData(prev => ({ ...prev, age: e.target.value }))}
+                    placeholder="Your age"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">Location</label>
+                  <Input
+                    value={profileData.location}
+                    onChange={(e) => setProfileData(prev => ({ ...prev, location: e.target.value }))}
+                    placeholder="Your city"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">Bio</label>
+                  <Textarea
+                    value={profileData.bio}
+                    onChange={(e) => setProfileData(prev => ({ ...prev, bio: e.target.value }))}
+                    placeholder="Tell something about yourself..."
+                    rows={3}
+                  />
+                </div>
+
+                <Button 
+                  variant="hero" 
+                  className="w-full mt-4"
+                  onClick={handleSaveProfile}
+                >
+                  Save Profile
+                </Button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

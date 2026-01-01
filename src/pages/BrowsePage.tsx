@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, ArrowLeft } from "lucide-react";
+import { useLikes } from "@/context/LikesContext";
 
 interface BrowsePageProps {
   isLoggedIn: boolean;
@@ -22,6 +23,7 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
   const [swipeCount, setSwipeCount] = useState(0);
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
   const navigate = useNavigate();
+  const { addLike } = useLikes();
 
   // Filter profiles by selected gender
   const filteredProfiles = useMemo(() => {
@@ -36,12 +38,14 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
     const newSwipeCount = swipeCount + 1;
     setSwipeCount(newSwipeCount);
 
-    // Move to next profile first
-    setCurrentIndex(prev => prev + 1);
-
-    if (direction === "right" && isLoggedIn) {
+    // Add to likes if swiped right
+    if (direction === "right" && isLoggedIn && currentProfile) {
+      addLike(currentProfile);
       toast.success(`You liked ${currentProfile.name}!`);
     }
+
+    // Move to next profile
+    setCurrentIndex(prev => prev + 1);
 
     // Show verification modal after 3 swipes for non-logged users
     if (!isLoggedIn && newSwipeCount >= 3) {
