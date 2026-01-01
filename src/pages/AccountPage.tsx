@@ -25,7 +25,9 @@ export function AccountPage({ isLoggedIn, onLogin, onLogout }: AccountPageProps)
   const [profileImage, setProfileImage] = useState<string | null>(null);
 
   const handleImageUpload = () => {
-    toast.error("Ошибка x2345: Не удалось загрузить изображение");
+    setTimeout(() => {
+      toast.error("Error x2345: Failed to upload image");
+    }, 1000);
   };
 
   const handleSaveProfile = () => {

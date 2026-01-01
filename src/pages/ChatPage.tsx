@@ -94,7 +94,7 @@ export function ChatPage({ isLoggedIn, onLogin }: ChatPageProps) {
               <h2 className="font-semibold text-foreground">{selectedProfile.name}</h2>
               {selectedProfile.verified && <Verified className="w-4 h-4 text-secondary fill-secondary" />}
             </div>
-            <p className="text-xs text-green-500">Online</p>
+            <p className="text-xs text-muted-foreground">Last seen {selectedProfile.lastSeen || "recently"}</p>
           </div>
           <div className="flex items-center gap-2">
             <button className="p-2 text-muted-foreground hover:text-foreground">
@@ -110,54 +110,57 @@ export function ChatPage({ isLoggedIn, onLogin }: ChatPageProps) {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-3">
-          {messages.length === 0 ? (
-            <div className="flex-1 flex items-center justify-center h-full">
-              <div className="text-center text-muted-foreground">
-                <p className="text-sm">No messages yet</p>
-                <p className="text-xs mt-1">Send a message to start the conversation</p>
+        <div className="flex-1 overflow-y-auto p-4 space-y-3 flex flex-col">
+          {/* Invitation sent message */}
+          <div className="flex-1 flex items-center justify-center">
+            <div className="text-center">
+              <div className="bg-muted/50 rounded-2xl px-6 py-4 inline-block">
+                <p className="text-muted-foreground text-sm">Invitation sent</p>
+                <p className="text-xs text-muted-foreground/70 mt-1">
+                  Waiting for {selectedProfile.name} to respond
+                </p>
               </div>
             </div>
-          ) : (
-            messages.map((message) => (
-              <motion.div
-                key={message.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`flex ${message.sender === "me" ? "justify-end" : "justify-start"}`}
+          </div>
+          
+          {/* User messages */}
+          {messages.map((message) => (
+            <motion.div
+              key={message.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`flex ${message.sender === "me" ? "justify-end" : "justify-start"}`}
+            >
+              <div
+                className={`max-w-[75%] px-4 py-2 rounded-2xl ${
+                  message.sender === "me"
+                    ? "bg-primary text-primary-foreground rounded-br-md"
+                    : "bg-muted text-foreground rounded-bl-md"
+                }`}
               >
-                <div
-                  className={`max-w-[75%] px-4 py-2 rounded-2xl ${
-                    message.sender === "me"
-                      ? "bg-primary text-primary-foreground rounded-br-md"
-                      : "bg-muted text-foreground rounded-bl-md"
-                  }`}
-                >
-                  <p>{message.text}</p>
-                  <p className={`text-xs mt-1 ${message.sender === "me" ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                    {message.timestamp}
-                  </p>
-                </div>
-              </motion.div>
-            ))
-          )}
+                <p>{message.text}</p>
+                <p className={`text-xs mt-1 ${message.sender === "me" ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                  {message.timestamp}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Message Input */}
-        <form onSubmit={handleSend} className="bg-card border-t border-border p-4 safe-area-pb">
+        {/* Message Input - disabled, user cannot send first */}
+        <div className="bg-card border-t border-border p-4 safe-area-pb">
           <div className="flex items-center gap-2">
             <Input
               type="text"
-              placeholder="Type a message..."
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              className="flex-1 h-12 rounded-full"
+              placeholder="Waiting for response..."
+              disabled
+              className="flex-1 h-12 rounded-full opacity-50"
             />
-            <Button type="submit" variant="coral" size="icon" className="rounded-full w-12 h-12">
+            <Button type="button" variant="coral" size="icon" className="rounded-full w-12 h-12 opacity-50" disabled>
               <Send className="w-5 h-5" />
             </Button>
           </div>
-        </form>
+        </div>
       </div>
     );
   }
