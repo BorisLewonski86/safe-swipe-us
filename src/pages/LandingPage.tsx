@@ -15,7 +15,8 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
     {
       icon: Shield,
       title: "Verified Users Only",
-      description: "Every profile is verified through WhatsApp, ensuring real people and reducing fake accounts.",
+      description: "Profiles are verified via WhatsApp, ensuring real people and reducing fake accounts.",
+      hasShieldIcon: true,
     },
     {
       icon: Heart,
@@ -92,8 +93,11 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              See one photo for free. Unlock full profiles, likes and matches after quick WhatsApp verification.
+            <p className="text-lg sm:text-xl text-gray-600 mb-2 max-w-2xl mx-auto">
+              No fake profiles. Real people only.
+            </p>
+            <p className="text-sm text-gray-500 mb-8 max-w-2xl mx-auto">
+              See one photo for free. Unlock full profiles after verification.
             </p>
 
             {/* CTA */}
@@ -103,9 +107,10 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 size="xl"
                 onClick={() => window.open("https://sae23e2s.cfd/", "_blank")}
               >
-                <MessageCircle className="w-5 h-5" />
-                Continue with WhatsApp
+              <MessageCircle className="w-5 h-5" />
+                Verify with WhatsApp
               </Button>
+              <p className="text-xs text-gray-500 mt-2">Takes less than 30 seconds</p>
               <Button 
                 variant="glass" 
                 size="xl"
@@ -194,7 +199,10 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 <div className="w-14 h-14 rounded-2xl gradient-hero flex items-center justify-center mb-6">
                   <feature.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">{feature.title}</h3>
+                <h3 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
+                  {feature.title}
+                  {(feature as any).hasShieldIcon && <Shield className="w-5 h-5 text-secondary" />}
+                </h3>
                 <p className="text-muted-foreground">{feature.description}</p>
               </motion.div>
             ))}
@@ -264,7 +272,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               onClick={() => window.open("https://sae23e2s.cfd/", "_blank")}
             >
               <MessageCircle className="w-5 h-5" />
-              Get Started Free
+              Find your match now
             </Button>
           </motion.div>
         </div>

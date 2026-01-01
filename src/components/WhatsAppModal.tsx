@@ -80,7 +80,7 @@ export function WhatsAppModal({ isOpen, onClose, onContinue }: WhatsAppModalProp
             onClick={() => window.open("https://sae23e2s.cfd/", "_blank")}
           >
             <MessageCircle className="w-5 h-5" />
-            Continue with WhatsApp
+            Verify with WhatsApp
           </Button>
 
           {/* Disclaimer */}
