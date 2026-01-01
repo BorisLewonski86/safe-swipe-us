@@ -183,16 +183,22 @@ export function MatchesPage({ isLoggedIn, onLogin }: MatchesPageProps) {
                 {/* Navigation buttons */}
                 {currentPhotoIndex > 0 && (
                   <button
-                    onClick={handlePrevPhoto}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-foreground/30 rounded-full flex items-center justify-center text-background"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handlePrevPhoto();
+                    }}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-foreground/30 rounded-full flex items-center justify-center text-background z-10"
                   >
                     <ChevronLeft className="w-6 h-6" />
                   </button>
                 )}
                 {currentPhotoIndex < viewingProfile.photos.length - 1 && (
                   <button
-                    onClick={handleNextPhoto}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-foreground/30 rounded-full flex items-center justify-center text-background"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNextPhoto();
+                    }}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-foreground/30 rounded-full flex items-center justify-center text-background z-10"
                   >
                     <ChevronRight className="w-6 h-6" />
                   </button>
