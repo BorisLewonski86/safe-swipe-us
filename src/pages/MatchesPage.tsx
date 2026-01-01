@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/Header";
 import { BottomNav } from "@/components/BottomNav";
-import { Heart, MessageCircle, Verified } from "lucide-react";
+import { Heart, MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { mockProfiles } from "@/data/profiles";
-import { useNavigate } from "react-router-dom";
+import { useLikes } from "@/context/LikesContext";
+import { toast } from "sonner";
 
 interface MatchesPageProps {
   isLoggedIn: boolean;
@@ -13,8 +12,12 @@ interface MatchesPageProps {
 }
 
 export function MatchesPage({ isLoggedIn, onLogin }: MatchesPageProps) {
-  const navigate = useNavigate();
-  const matches = mockProfiles.slice(0, 3); // Mock matches
+  const { likedProfiles, addToChat } = useLikes();
+
+  const handleSendToChat = (profile: typeof likedProfiles[0]) => {
+    addToChat(profile);
+    toast.success(`${profile.name} добавлена в чат!`);
+  };
 
   if (!isLoggedIn) {
     return (
@@ -50,73 +53,55 @@ export function MatchesPage({ isLoggedIn, onLogin }: MatchesPageProps) {
       
       <main className="pt-20 pb-24 px-4">
         <div className="max-w-lg mx-auto">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Matches</h1>
-          <p className="text-sm text-muted-foreground mb-6">People who liked you back</p>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Likes</h1>
+          <p className="text-sm text-muted-foreground mb-6">Profiles you liked</p>
 
-          {/* Likes Section */}
-          <div className="mb-8">
-            <h2 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-              <Heart className="w-4 h-4 text-primary" />
-              New Likes
-            </h2>
-            <div className="flex gap-3 overflow-x-auto pb-2">
-              {mockProfiles.slice(3, 6).map((profile, index) => (
+          {likedProfiles.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center py-16"
+            >
+              <div className="w-16 h-16 rounded-full bg-muted-foreground/10 flex items-center justify-center mx-auto mb-4">
+                <Heart className="w-8 h-8 text-muted-foreground" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">No likes yet</h3>
+              <p className="text-sm text-muted-foreground">
+                Start swiping to like profiles
+              </p>
+            </motion.div>
+          ) : (
+            <div className="space-y-3">
+              {likedProfiles.map((profile, index) => (
                 <motion.div
                   key={profile.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex-shrink-0 w-24"
+                  className="bg-card rounded-2xl p-4 shadow-soft border border-border flex items-center gap-4"
                 >
-                  <div className="relative w-24 h-32 rounded-2xl overflow-hidden shadow-soft">
-                    <img
-                      src={profile.photos[0]}
-                      alt={profile.name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
-                    <div className="absolute bottom-2 left-2 text-background">
-                      <p className="text-sm font-semibold">{profile.name}</p>
-                    </div>
+                  <img
+                    src={profile.photos[0]}
+                    alt={profile.name}
+                    className="w-16 h-16 rounded-xl object-cover"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-foreground">{profile.name}, {profile.age}</h3>
+                    <p className="text-sm text-muted-foreground truncate">{profile.bio}</p>
                   </div>
+                  <Button 
+                    variant="coral" 
+                    size="sm"
+                    onClick={() => handleSendToChat(profile)}
+                    className="gap-2"
+                  >
+                    <Send className="w-4 h-4" />
+                    Chat
+                  </Button>
                 </motion.div>
               ))}
             </div>
-          </div>
-
-          {/* Matches List */}
-          <h2 className="text-sm font-semibold text-foreground mb-3">Your Matches</h2>
-          <div className="space-y-3">
-            {matches.map((match, index) => (
-              <motion.div
-                key={match.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-card rounded-2xl p-4 shadow-soft border border-border flex items-center gap-4 cursor-pointer hover:shadow-card transition-shadow"
-                onClick={() => navigate("/chat")}
-              >
-                <div className="relative">
-                  <img
-                    src={match.photos[0]}
-                    alt={match.name}
-                    className="w-14 h-14 rounded-full object-cover"
-                  />
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-card" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-1">
-                    <h3 className="font-semibold text-foreground">{match.name}, {match.age}</h3>
-                    {match.verified && <Verified className="w-4 h-4 text-secondary fill-secondary" />}
-                  </div>
-                  <p className="text-sm text-muted-foreground truncate">{match.bio}</p>
-                </div>
-                <Button variant="coral" size="sm">
-                  <MessageCircle className="w-4 h-4" />
-                </Button>
-              </motion.div>
-            ))}
-          </div>
+          )}
         </div>
       </main>
 

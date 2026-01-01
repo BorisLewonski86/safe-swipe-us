@@ -5,7 +5,7 @@ import { BottomNav } from "@/components/BottomNav";
 import { MessageCircle, Send, ArrowLeft, Verified, Phone, Video, MoreVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { mockProfiles } from "@/data/profiles";
+import { useLikes } from "@/context/LikesContext";
 
 interface ChatPageProps {
   isLoggedIn: boolean;
@@ -20,29 +20,32 @@ interface Message {
 }
 
 export function ChatPage({ isLoggedIn, onLogin }: ChatPageProps) {
+  const { chatProfiles } = useLikes();
   const [selectedChat, setSelectedChat] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState("");
-  const [messages, setMessages] = useState<Message[]>([
-    { id: "1", text: "Hey! I saw you like hiking too 🏔️", sender: "them", timestamp: "2:30 PM" },
-    { id: "2", text: "Yes! I love it. Have you been to Joshua Tree?", sender: "me", timestamp: "2:32 PM" },
-    { id: "3", text: "Not yet but it's on my list! Want to go together sometime?", sender: "them", timestamp: "2:33 PM" },
-  ]);
+  const [chatMessages, setChatMessages] = useState<Record<string, Message[]>>({});
 
-  const chats = mockProfiles.slice(0, 4);
-  const selectedProfile = chats.find(c => c.id === selectedChat);
+  const selectedProfile = chatProfiles.find(c => c.id === selectedChat);
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newMessage.trim()) return;
+    if (!newMessage.trim() || !selectedChat) return;
     
-    setMessages(prev => [...prev, {
+    const newMsg: Message = {
       id: Date.now().toString(),
       text: newMessage,
       sender: "me",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }]);
+    };
+
+    setChatMessages(prev => ({
+      ...prev,
+      [selectedChat]: [...(prev[selectedChat] || []), newMsg]
+    }));
     setNewMessage("");
   };
+
+  const messages = selectedChat ? chatMessages[selectedChat] || [] : [];
 
   if (!isLoggedIn) {
     return (
@@ -108,27 +111,36 @@ export function ChatPage({ isLoggedIn, onLogin }: ChatPageProps) {
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
-          {messages.map((message) => (
-            <motion.div
-              key={message.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={`flex ${message.sender === "me" ? "justify-end" : "justify-start"}`}
-            >
-              <div
-                className={`max-w-[75%] px-4 py-2 rounded-2xl ${
-                  message.sender === "me"
-                    ? "bg-primary text-primary-foreground rounded-br-md"
-                    : "bg-muted text-foreground rounded-bl-md"
-                }`}
-              >
-                <p>{message.text}</p>
-                <p className={`text-xs mt-1 ${message.sender === "me" ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                  {message.timestamp}
-                </p>
+          {messages.length === 0 ? (
+            <div className="flex-1 flex items-center justify-center h-full">
+              <div className="text-center text-muted-foreground">
+                <p className="text-sm">No messages yet</p>
+                <p className="text-xs mt-1">Send a message to start the conversation</p>
               </div>
-            </motion.div>
-          ))}
+            </div>
+          ) : (
+            messages.map((message) => (
+              <motion.div
+                key={message.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`flex ${message.sender === "me" ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`max-w-[75%] px-4 py-2 rounded-2xl ${
+                    message.sender === "me"
+                      ? "bg-primary text-primary-foreground rounded-br-md"
+                      : "bg-muted text-foreground rounded-bl-md"
+                  }`}
+                >
+                  <p>{message.text}</p>
+                  <p className={`text-xs mt-1 ${message.sender === "me" ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                    {message.timestamp}
+                  </p>
+                </div>
+              </motion.div>
+            ))
+          )}
         </div>
 
         {/* Message Input */}
@@ -160,44 +172,55 @@ export function ChatPage({ isLoggedIn, onLogin }: ChatPageProps) {
           <h1 className="text-2xl font-bold text-foreground mb-2">Messages</h1>
           <p className="text-sm text-muted-foreground mb-6">Your conversations</p>
 
-          <div className="space-y-2">
-            {chats.map((chat, index) => (
-              <motion.div
-                key={chat.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                onClick={() => setSelectedChat(chat.id)}
-                className="bg-card rounded-2xl p-4 shadow-soft border border-border flex items-center gap-4 cursor-pointer hover:shadow-card transition-shadow"
-              >
-                <div className="relative">
-                  <img
-                    src={chat.photos[0]}
-                    alt={chat.name}
-                    className="w-14 h-14 rounded-full object-cover"
-                  />
-                  {index === 0 && (
-                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-card" />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1">
-                      <h3 className="font-semibold text-foreground">{chat.name}</h3>
-                      {chat.verified && <Verified className="w-4 h-4 text-secondary fill-secondary" />}
-                    </div>
-                    <span className="text-xs text-muted-foreground">2:33 PM</span>
+          {chatProfiles.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center py-16"
+            >
+              <div className="w-16 h-16 rounded-full bg-muted-foreground/10 flex items-center justify-center mx-auto mb-4">
+                <MessageCircle className="w-8 h-8 text-muted-foreground" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">No chats yet</h3>
+              <p className="text-sm text-muted-foreground">
+                Like profiles and send them to chat
+              </p>
+            </motion.div>
+          ) : (
+            <div className="space-y-2">
+              {chatProfiles.map((chat, index) => (
+                <motion.div
+                  key={chat.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  onClick={() => setSelectedChat(chat.id)}
+                  className="bg-card rounded-2xl p-4 shadow-soft border border-border flex items-center gap-4 cursor-pointer hover:shadow-card transition-shadow"
+                >
+                  <div className="relative">
+                    <img
+                      src={chat.photos[0]}
+                      alt={chat.name}
+                      className="w-14 h-14 rounded-full object-cover"
+                    />
                   </div>
-                  <p className="text-sm text-muted-foreground truncate">
-                    {index === 0 ? "Want to go together sometime?" : "Tap to start chatting"}
-                  </p>
-                </div>
-                {index === 0 && (
-                  <div className="w-2 h-2 bg-primary rounded-full" />
-                )}
-              </motion.div>
-            ))}
-          </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1">
+                        <h3 className="font-semibold text-foreground">{chat.name}</h3>
+                        {chat.verified && <Verified className="w-4 h-4 text-secondary fill-secondary" />}
+                      </div>
+                    </div>
+                    <p className="text-sm text-muted-foreground truncate">
+                      {chatMessages[chat.id]?.length 
+                        ? chatMessages[chat.id][chatMessages[chat.id].length - 1].text 
+                        : "Tap to start chatting"}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </main>
 
