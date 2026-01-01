@@ -2,7 +2,7 @@ import { useState, forwardRef } from "react";
 import { motion, useMotionValue, useTransform, PanInfo, AnimatePresence } from "framer-motion";
 import { Heart, X, Lock, MapPin, Verified, ChevronLeft, ChevronRight, Camera } from "lucide-react";
 import { Profile } from "@/data/profiles";
-
+import { Skeleton } from "@/components/ui/skeleton";
 interface SwipeableProfileCardProps {
   profile: Profile;
   onSwipe: (direction: "left" | "right") => void;
@@ -22,6 +22,8 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
   const [exitX, setExitX] = useState(0);
   const [showGallery, setShowGallery] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [galleryImageLoaded, setGalleryImageLoaded] = useState(false);
   
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-15, 15]);
@@ -58,11 +60,13 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
   const handleCloseGallery = () => {
     setShowGallery(false);
     setCurrentPhotoIndex(0);
+    setGalleryImageLoaded(false);
   };
 
   const handleNextPhoto = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (currentPhotoIndex < profile.photos.length - 1) {
+      setGalleryImageLoaded(false);
       setCurrentPhotoIndex(prev => prev + 1);
     }
   };
@@ -70,6 +74,7 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
   const handlePrevPhoto = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (currentPhotoIndex > 0) {
+      setGalleryImageLoaded(false);
       setCurrentPhotoIndex(prev => prev - 1);
     }
   };
@@ -104,12 +109,16 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
             onClick={handlePhotoClick}
             className={`w-full h-full ${hasMultiplePhotos ? 'cursor-pointer' : ''}`}
           >
+            {!imageLoaded && (
+              <Skeleton className="absolute inset-0 w-full h-full bg-muted animate-pulse" />
+            )}
             <img
               src={profile.photos[0]}
               alt={profile.name}
               loading="eager"
               decoding="async"
-              className="w-full h-full object-cover pointer-events-none"
+              onLoad={() => setImageLoaded(true)}
+              className={`w-full h-full object-cover pointer-events-none transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             />
           </div>
 
@@ -201,14 +210,18 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
               onClick={(e) => e.stopPropagation()}
             >
               {/* Photo with blur for non-first photos when not logged in */}
+              {!galleryImageLoaded && (
+                <Skeleton className="absolute inset-0 w-full h-full bg-muted animate-pulse" />
+              )}
               <img
                 src={profile.photos[currentPhotoIndex]}
                 alt={`${profile.name} photo ${currentPhotoIndex + 1}`}
                 loading="lazy"
                 decoding="async"
-                className={`w-full h-full object-cover ${
+                onLoad={() => setGalleryImageLoaded(true)}
+                className={`w-full h-full object-cover transition-opacity duration-300 ${
                   !isLoggedIn && currentPhotoIndex > 0 ? "blur-xl scale-110" : ""
-                }`}
+                } ${galleryImageLoaded ? 'opacity-100' : 'opacity-0'}`}
               />
 
               {/* Verification overlay for blurred photos */}
