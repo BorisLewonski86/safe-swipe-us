@@ -103,7 +103,7 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
           mass: 0.5 
         }}
       >
-        <div className="relative w-full aspect-[3/4] max-h-[360px] rounded-2xl overflow-hidden shadow-card cursor-grab active:cursor-grabbing bg-muted">
+        <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-card cursor-grab active:cursor-grabbing">
           {/* Photo - clickable to open gallery */}
           <div 
             onClick={handlePhotoClick}
@@ -118,7 +118,7 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
               loading="eager"
               decoding="async"
               onLoad={() => setImageLoaded(true)}
-              className={`w-full h-full object-contain pointer-events-none transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              className={`w-full h-full object-cover pointer-events-none transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             />
           </div>
 
