@@ -101,16 +101,18 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </p>
 
             {/* CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button 
-                variant="whatsapp" 
-                size="xl"
-                onClick={() => window.open("https://sae23e2s.cfd/", "_blank")}
-              >
-              <MessageCircle className="w-5 h-5" />
-                Verify with WhatsApp
-              </Button>
-              <p className="text-xs text-gray-500 mt-2">Takes less than 30 seconds</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+              <div className="flex flex-col items-center">
+                <Button 
+                  variant="whatsapp" 
+                  size="xl"
+                  onClick={() => window.open("https://sae23e2s.cfd/", "_blank")}
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Verify with WhatsApp
+                </Button>
+                <p className="text-xs text-gray-500 mt-2">Takes less than 30 seconds</p>
+              </div>
               <Button 
                 variant="glass" 
                 size="xl"
