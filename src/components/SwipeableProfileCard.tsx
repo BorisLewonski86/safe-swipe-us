@@ -220,7 +220,7 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
                 decoding="async"
                 onLoad={() => setGalleryImageLoaded(true)}
                 className={`w-full h-full object-cover transition-opacity duration-300 ${
-                  !isLoggedIn && currentPhotoIndex > 0 ? "blur-xl scale-110" : ""
+                  !isLoggedIn && currentPhotoIndex > 0 ? "blur-sm scale-105" : ""
                 } ${galleryImageLoaded ? 'opacity-100' : 'opacity-0'}`}
               />
 

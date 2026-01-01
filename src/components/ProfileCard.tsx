@@ -61,7 +61,7 @@ export function ProfileCard({ profile, onLike, onPass, onUnlock, isLoggedIn }: P
                 <img
                   src={profile.photos[1]}
                   alt="Locked"
-                  className="w-full h-full object-cover blur-lg scale-110"
+                  className="w-full h-full object-cover blur-sm scale-105"
                 />
                 <div className="absolute inset-0 bg-foreground/40 flex items-center justify-center">
                   <Lock className="w-5 h-5 text-background" />
