@@ -8,6 +8,7 @@ export interface Profile {
   verified: boolean;
   distance?: string;
   gender: "male" | "female";
+  lastSeen?: string;
 }
 
 // Profile data parsed from bio.txt files
@@ -100,6 +101,21 @@ function getPhotos(id: number, count: number, gender: "male" | "female", extensi
   return photos;
 }
 
+// Random last seen times
+const lastSeenOptions = [
+  "20 min ago",
+  "1 hour ago",
+  "2 hours ago",
+  "5 hours ago",
+  "1 day ago",
+  "2 days ago",
+  "3 days ago",
+];
+
+function getRandomLastSeen(): string {
+  return lastSeenOptions[Math.floor(Math.random() * lastSeenOptions.length)];
+}
+
 // Generate profiles from data
 const maleProfiles: Profile[] = menProfilesData.map(data => ({
   id: `m${data.id}`,
@@ -111,6 +127,7 @@ const maleProfiles: Profile[] = menProfilesData.map(data => ({
   verified: Math.random() > 0.3,
   distance: data.distance,
   gender: "male" as const,
+  lastSeen: getRandomLastSeen(),
 }));
 
 const femaleProfiles: Profile[] = womenProfilesData.map(data => ({
@@ -123,6 +140,7 @@ const femaleProfiles: Profile[] = womenProfilesData.map(data => ({
   verified: Math.random() > 0.3,
   distance: data.distance,
   gender: "female" as const,
+  lastSeen: getRandomLastSeen(),
 }));
 
 export const mockProfiles: Profile[] = [...maleProfiles, ...femaleProfiles];
