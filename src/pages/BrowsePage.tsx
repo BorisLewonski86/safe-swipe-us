@@ -23,10 +23,10 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
   const navigate = useNavigate();
 
-  // Filter profiles by selected gender and limit to 5
+  // Filter profiles by selected gender
   const filteredProfiles = useMemo(() => {
     if (!selectedGender) return [];
-    return mockProfiles.filter(p => p.gender === selectedGender).slice(0, 5);
+    return mockProfiles.filter(p => p.gender === selectedGender);
   }, [selectedGender]);
 
   const currentProfile = filteredProfiles[currentIndex];

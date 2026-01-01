@@ -10,151 +10,59 @@ export interface Profile {
   gender: "male" | "female";
 }
 
-export const mockProfiles: Profile[] = [
-  {
-    id: "1",
-    name: "Sarah",
-    age: 28,
-    city: "Los Angeles",
-    bio: "Coffee lover ☕ | Hiking enthusiast 🏔️ | Looking for someone to share adventures with",
-    photos: [
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=800&fit=crop",
-    ],
-    verified: true,
-    distance: "2 miles away",
-    gender: "female",
-  },
-  {
-    id: "2",
-    name: "Michael",
-    age: 32,
-    city: "New York",
-    bio: "Software engineer by day, chef by night 🍳 | Dog dad to Max 🐕",
-    photos: [
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=800&fit=crop",
-    ],
-    verified: true,
-    distance: "5 miles away",
-    gender: "male",
-  },
-  {
-    id: "3",
-    name: "Emma",
-    age: 26,
-    city: "Miami",
-    bio: "Beach vibes only 🌊 | Yoga instructor | Let's grab tacos 🌮",
-    photos: [
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1502323777036-f29e3972f7e4?w=600&h=800&fit=crop",
-    ],
-    verified: true,
-    distance: "1 mile away",
-    gender: "female",
-  },
-  {
-    id: "4",
-    name: "James",
-    age: 29,
-    city: "Chicago",
-    bio: "Music producer 🎵 | Vinyl collector | Your next concert buddy",
-    photos: [
-      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=800&fit=crop",
-    ],
-    verified: false,
-    distance: "3 miles away",
-    gender: "male",
-  },
-  {
-    id: "5",
-    name: "Olivia",
-    age: 31,
-    city: "San Francisco",
-    bio: "Startup founder 🚀 | Wine enthusiast 🍷 | Always planning the next trip",
-    photos: [
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=600&h=800&fit=crop",
-    ],
-    verified: true,
-    distance: "4 miles away",
-    gender: "female",
-  },
-  {
-    id: "6",
-    name: "David",
-    age: 27,
-    city: "Austin",
-    bio: "Live music capital 🎸 | BBQ connoisseur | Looking for my partner in crime",
-    photos: [
-      "https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=800&fit=crop",
-    ],
-    verified: true,
-    distance: "6 miles away",
-    gender: "male",
-  },
-  {
-    id: "7",
-    name: "Jessica",
-    age: 25,
-    city: "Seattle",
-    bio: "Tech enthusiast 💻 | Coffee addict ☕ | Weekend hiker",
-    photos: [
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1496440737103-cd596325d314?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1502767089025-6572583495f9?w=600&h=800&fit=crop",
-    ],
-    verified: true,
-    distance: "3 miles away",
-    gender: "female",
-  },
-  {
-    id: "8",
-    name: "Ryan",
-    age: 30,
-    city: "Denver",
-    bio: "Snowboard instructor ❄️ | Craft beer lover 🍺 | Adventure seeker",
-    photos: [
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&h=800&fit=crop",
-    ],
-    verified: true,
-    distance: "8 miles away",
-    gender: "male",
-  },
-  {
-    id: "9",
-    name: "Madison",
-    age: 27,
-    city: "Boston",
-    bio: "Nurse by profession 💉 | Foodie at heart 🍕 | Looking for genuine connections",
-    photos: [
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1499887142886-791eca5918cd?w=600&h=800&fit=crop",
-    ],
-    verified: true,
-    distance: "2 miles away",
-    gender: "female",
-  },
-  {
-    id: "10",
-    name: "Tyler",
-    age: 28,
-    city: "Phoenix",
-    bio: "Fitness trainer 💪 | Nature photographer 📸 | Let's explore together",
-    photos: [
-      "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1501196354995-cbb51c65adc7?w=600&h=800&fit=crop",
-    ],
-    verified: false,
-    distance: "5 miles away",
-    gender: "male",
-  },
+// Profile data parsed from bio.txt files
+const menProfilesData: { id: number; name: string; age: number; city: string; distance: string; bio: string; photoCount: number; photoExtensions?: string[] }[] = [
+  { id: 1, name: "Tyler", age: 29, city: "Denver", distance: "3 miles away", bio: "Sports fanatic | Gym regular | Craft beer enthusiast", photoCount: 5 },
+  { id: 2, name: "Brandon", age: 35, city: "Seattle", distance: "4 miles away", bio: "I travel to Asia once a year | Foodie at heart | Love photography", photoCount: 5 },
+  { id: 3, name: "Ryan", age: 30, city: "Miami", distance: "2 miles away", bio: "Pool and gym are my second home | Fitness is my lifestyle", photoCount: 5 },
+  { id: 4, name: "Marcus", age: 28, city: "Portland", distance: "3 miles away", bio: "I brew my own beer | Weekend hiker | Dog lover", photoCount: 4, photoExtensions: ["png", "png", "jpg", "jpg"] },
+  { id: 5, name: "Marcus", age: 31, city: "Portland", distance: "3 miles away", bio: "I brew my own beer | Weekend hiker | Dog lover", photoCount: 3 },
+  { id: 6, name: "Derek", age: 33, city: "San Diego", distance: "5 miles away", bio: "Beach lover | Surfer | Living the California dream", photoCount: 5 },
+  { id: 7, name: "Ethan", age: 28, city: "Denver", distance: "2 miles away", bio: "I live for hiking trails | Nature activist at heart | Weekends are for the mountains", photoCount: 5 },
+  { id: 8, name: "Stefan", age: 40, city: "Los Angeles", distance: "6 miles away", bio: "I moved from Germany | I own a car detailing shop | Precision is my thing", photoCount: 4 },
+  { id: 9, name: "Blake", age: 30, city: "Miami", distance: "3 miles away", bio: "People say I look like Orlando Bloom | I love photoshoots | Searching for my Elizabeth Swann", photoCount: 4 },
+  { id: 10, name: "Andre", age: 29, city: "Atlanta", distance: "4 miles away", bio: "I live and breathe hip-hop | I write my own lyrics | Battle rapper on weekends", photoCount: 4 },
+  { id: 11, name: "Chris", age: 27, city: "Houston", distance: "3 miles away", bio: "Engineer by day, gamer by night | Love building things", photoCount: 4 },
+  { id: 12, name: "Cole", age: 29, city: "Austin", distance: "3 miles away", bio: "I'm obsessed with road trips | My car is my freedom | Always chasing new horizons", photoCount: 3 },
+  { id: 13, name: "Jake", age: 36, city: "Detroit", distance: "4 miles away", bio: "I opened my own car detailing shop | Drummer in a rock band", photoCount: 4 },
+  { id: 14, name: "Oliver", age: 26, city: "New York", distance: "2 miles away", bio: "Art student at NYU | I live for museums and galleries | Painting is my escape", photoCount: 2 },
+  { id: 15, name: "Luka", age: 29, city: "Phoenix", distance: "5 miles away", bio: "I moved from Serbia | Car care is my passion | I love making vehicles shine", photoCount: 4 },
+  { id: 16, name: "Leo", age: 24, city: "Chicago", distance: "3 miles away", bio: "Bookworm and series addict", photoCount: 5 },
+  { id: 17, name: "Mason", age: 25, city: "Dallas", distance: "4 miles away", bio: "Didn't go to college but found my passion in fitness | Gym is my life", photoCount: 5 },
+  { id: 18, name: "Greg", age: 43, city: "Boston", distance: "6 miles away", bio: "I work a regular office job | Tennis is my weekend escape", photoCount: 4 },
+  { id: 19, name: "Dante", age: 31, city: "Philadelphia", distance: "4 miles away", bio: "Professional basketball player | Living my dream on the court", photoCount: 3 },
+  { id: 20, name: "Kevin", age: 34, city: "San Francisco", distance: "5 miles away", bio: "Tech entrepreneur | Coffee addict | Dog dad", photoCount: 3 },
+  { id: 21, name: "Connor", age: 27, city: "Miami", distance: "2 miles away", bio: "Starting my career in real estate | I'm passionate about finding people their dream homes", photoCount: 4 },
+  { id: 22, name: "Nathan", age: 32, city: "Seattle", distance: "4 miles away", bio: "Software developer | Music lover | Weekend chef", photoCount: 3 },
+  { id: 23, name: "Jordan", age: 25, city: "New York", distance: "3 miles away", bio: "Law student | Looking for something casual and fun | No pressure, just good vibes", photoCount: 3 },
+  { id: 24, name: "Alex", age: 28, city: "Chicago", distance: "3 miles away", bio: "Photographer | Travel enthusiast | Always looking for the next adventure", photoCount: 2 },
+  { id: 25, name: "Will", age: 30, city: "Denver", distance: "4 miles away", bio: "Outdoor enthusiast | Ski instructor | Mountain life", photoCount: 2 },
+  { id: 26, name: "Trevor", age: 29, city: "Nashville", distance: "3 miles away", bio: "I own a small recording studio | Music production is my life", photoCount: 3 },
+  { id: 27, name: "Ian", age: 33, city: "Portland", distance: "5 miles away", bio: "Craft beer enthusiast | Hiking addict | Dog lover", photoCount: 3 },
+  { id: 28, name: "Caleb", age: 26, city: "Austin", distance: "3 miles away", bio: "Musician | Guitar player | Looking for my duet partner", photoCount: 3 },
+  { id: 29, name: "Shane", age: 31, city: "Los Angeles", distance: "4 miles away", bio: "Actor and model | Fitness enthusiast | Living the dream", photoCount: 3 },
+  { id: 30, name: "Victor", age: 30, city: "Ontario", distance: "5 miles away", bio: "I work in cybersecurity | Protecting data by day, exploring life by night | Tech nerd with a sense of humor", photoCount: 3, photoExtensions: ["jpg", "jpg", "png"] },
 ];
+
+// Generate photos array for each profile
+function getPhotos(id: number, count: number, extensions?: string[]): string[] {
+  const photos: string[] = [];
+  for (let i = 1; i <= count; i++) {
+    const ext = extensions ? extensions[i - 1] : "jpg";
+    photos.push(`/profiles/men/${id}/${i}.${ext}`);
+  }
+  return photos;
+}
+
+// Generate profiles from data
+export const mockProfiles: Profile[] = menProfilesData.map(data => ({
+  id: data.id.toString(),
+  name: data.name,
+  age: data.age,
+  city: data.city,
+  bio: data.bio,
+  photos: getPhotos(data.id, data.photoCount, data.photoExtensions),
+  verified: Math.random() > 0.3, // Random verification status
+  distance: data.distance,
+  gender: "male" as const,
+}));
