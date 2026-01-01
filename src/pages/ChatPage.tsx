@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/Header";
 import { BottomNav } from "@/components/BottomNav";
-import { MessageCircle, Send, ArrowLeft, Verified, Phone, Video, MoreVertical } from "lucide-react";
+import { MessageCircle, Send, ArrowLeft, Verified } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLikes } from "@/context/LikesContext";
@@ -95,17 +95,6 @@ export function ChatPage({ isLoggedIn, onLogin }: ChatPageProps) {
               {selectedProfile.verified && <Verified className="w-4 h-4 text-secondary fill-secondary" />}
             </div>
             <p className="text-xs text-muted-foreground">Last seen {selectedProfile.lastSeen || "recently"}</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <button className="p-2 text-muted-foreground hover:text-foreground">
-              <Phone className="w-5 h-5" />
-            </button>
-            <button className="p-2 text-muted-foreground hover:text-foreground">
-              <Video className="w-5 h-5" />
-            </button>
-            <button className="p-2 text-muted-foreground hover:text-foreground">
-              <MoreVertical className="w-5 h-5" />
-            </button>
           </div>
         </div>
 

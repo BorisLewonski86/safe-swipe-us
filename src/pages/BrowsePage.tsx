@@ -38,6 +38,12 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
     const newSwipeCount = swipeCount + 1;
     setSwipeCount(newSwipeCount);
 
+    // Check if this is the last profile
+    if (currentIndex >= filteredProfiles.length - 1) {
+      toast.error("You have reached the limit for a new account. Come back tomorrow!");
+      return;
+    }
+
     // Add to likes if swiped right
     if (direction === "right" && isLoggedIn && currentProfile) {
       addLike(currentProfile);
