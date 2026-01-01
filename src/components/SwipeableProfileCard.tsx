@@ -176,18 +176,16 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
             <p className="text-[11px] sm:text-xs text-background/80 line-clamp-2 leading-snug">{profile.bio}</p>
           </div>
 
-          {/* Swipe hint */}
+          {/* Swipe hint icons */}
           {isTop && (
-            <div className="absolute bottom-16 sm:bottom-20 left-0 right-0 flex justify-center gap-3 sm:gap-6 pointer-events-none">
-              <div className="flex items-center gap-1 sm:gap-1.5 bg-background/20 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full">
-                <X className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-red-400" />
-                <span className="text-[9px] sm:text-[10px] text-background font-medium">Swipe left</span>
+            <>
+              <div className="absolute left-3 bottom-24 sm:bottom-28 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-background/20 backdrop-blur-sm flex items-center justify-center pointer-events-none">
+                <X className="w-5 h-5 sm:w-6 sm:h-6 text-red-400" />
               </div>
-              <div className="flex items-center gap-1 sm:gap-1.5 bg-background/20 backdrop-blur-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full">
-                <span className="text-[9px] sm:text-[10px] text-background font-medium">Swipe right</span>
-                <Heart className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-green-400" />
+              <div className="absolute right-3 bottom-24 sm:bottom-28 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-background/20 backdrop-blur-sm flex items-center justify-center pointer-events-none">
+                <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
               </div>
-            </div>
+            </>
           )}
         </div>
       </motion.div>
