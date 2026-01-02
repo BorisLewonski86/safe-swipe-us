@@ -165,12 +165,6 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
             <div className="flex items-center gap-1 text-background/90 text-xs sm:text-sm mb-1">
               <MapPin className="w-3 sm:w-3.5 h-3 sm:h-3.5 flex-shrink-0" />
               <span className="truncate max-w-[120px] sm:max-w-none">{profile.city}</span>
-              {profile.distance && (
-                <>
-                  <span className="mx-0.5 sm:mx-1">•</span>
-                  <span className="flex-shrink-0">{profile.distance}</span>
-                </>
-              )}
             </div>
             
             <p className="text-[11px] sm:text-xs text-background/80 line-clamp-2 leading-snug">{profile.bio}</p>
