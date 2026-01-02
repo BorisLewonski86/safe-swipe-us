@@ -60,8 +60,8 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
     // Move to next profile
     setCurrentIndex(prev => prev + 1);
 
-    // Show verification modal after 3 swipes for non-logged users
-    if (!isLoggedIn && newSwipeCount >= 3) {
+    // Show verification modal after 6 swipes for non-logged users
+    if (!isLoggedIn && newSwipeCount >= 6) {
       setShowWhatsAppModal(true);
     }
   };
