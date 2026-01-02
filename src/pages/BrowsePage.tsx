@@ -25,10 +25,17 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
   const navigate = useNavigate();
   const { addLike } = useLikes();
 
-  // Filter profiles by selected gender
+  // Filter and shuffle profiles by selected gender
   const filteredProfiles = useMemo(() => {
     if (!selectedGender) return [];
-    return mockProfiles.filter(p => p.gender === selectedGender);
+    const filtered = mockProfiles.filter(p => p.gender === selectedGender);
+    // Fisher-Yates shuffle for random order
+    const shuffled = [...filtered];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
   }, [selectedGender]);
 
   const currentProfile = filteredProfiles[currentIndex];
