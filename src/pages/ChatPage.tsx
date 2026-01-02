@@ -94,6 +94,7 @@ export function ChatPage({ isLoggedIn, onLogin }: ChatPageProps) {
               src={selectedProfile.photos[0]}
               alt={selectedProfile.name}
               className="w-10 h-10 rounded-full object-cover hover:ring-2 hover:ring-primary transition-all"
+              loading="lazy"
             />
           </button>
           <div className="flex-1">
@@ -208,6 +209,7 @@ export function ChatPage({ isLoggedIn, onLogin }: ChatPageProps) {
                       src={chat.photos[0]}
                       alt={chat.name}
                       className="w-14 h-14 rounded-full object-cover"
+                      loading="lazy"
                     />
                   </div>
                   <div className="flex-1 min-w-0">

@@ -100,6 +100,7 @@ export function ProfileGallery({ profile, isOpen, onClose }: ProfileGalleryProps
                 src={photo}
                 alt={`Thumbnail ${index + 1}`}
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </button>
           ))}

