@@ -18,8 +18,8 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
-  // TEST MODE: Set to true to simulate verified user
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  // User starts as not logged in - must verify via WhatsApp
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
     // Navigate to auth is handled in components
