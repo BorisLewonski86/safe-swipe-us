@@ -32,7 +32,7 @@ export function AccountPage({ isLoggedIn, onLogin, onLogout }: AccountPageProps)
 
   const handleSaveProfile = () => {
     setShowEditProfile(false);
-    toast.success("Профиль сохранен!");
+    toast.success("Profile saved!");
   };
 
   if (!isLoggedIn) {

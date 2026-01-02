@@ -163,12 +163,6 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
                   ))}
                 </div>
 
-                {/* Counter */}
-                <div className="text-center mt-4">
-                  <span className="text-sm text-muted-foreground">
-                    {currentIndex + 1} of {filteredProfiles.length}
-                  </span>
-                </div>
               </motion.div>
             )}
           </AnimatePresence>

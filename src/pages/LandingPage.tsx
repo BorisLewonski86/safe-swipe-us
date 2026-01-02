@@ -116,9 +116,8 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               </div>
               <div className="flex flex-col items-center w-full sm:w-auto">
                 <Button 
-                  variant="glass" 
                   size="xl"
-                  className="w-full sm:w-auto"
+                  className="w-full sm:w-auto bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400 text-white border-0 hover:opacity-90 shadow-lg"
                   onClick={() => navigate("/browse")}
                 >
                   Browse Profiles
