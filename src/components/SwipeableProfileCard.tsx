@@ -87,9 +87,10 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
         style={{ 
           x, 
           rotate, 
-          opacity,
+          opacity: isTop ? opacity : 0,
           zIndex: isTop ? 10 : 0,
           transform: 'translateZ(0)',
+          pointerEvents: isTop ? 'auto' : 'none',
         }}
         drag={isTop ? "x" : false}
         dragConstraints={{ left: 0, right: 0 }}
@@ -103,7 +104,7 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
           mass: 0.5 
         }}
       >
-        <div className="relative mx-auto w-full max-w-[340px] h-full max-h-[500px] sm:aspect-[3/4] sm:h-auto rounded-2xl overflow-hidden shadow-card cursor-grab active:cursor-grabbing">
+        <div className="relative mx-auto w-full max-w-[340px] h-full max-h-[500px] sm:aspect-[3/4] sm:h-auto rounded-2xl overflow-hidden shadow-card cursor-grab active:cursor-grabbing bg-card">
           {/* Photo - clickable to open gallery */}
           <div 
             onClick={handlePhotoClick}
