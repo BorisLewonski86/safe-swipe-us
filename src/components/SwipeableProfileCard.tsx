@@ -103,7 +103,7 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
           mass: 0.5 
         }}
       >
-        <div className="relative mx-auto w-full max-w-[340px] aspect-[3/4] rounded-2xl overflow-hidden shadow-card cursor-grab active:cursor-grabbing">
+        <div className="relative mx-auto w-full max-w-[340px] h-full max-h-[500px] sm:aspect-[3/4] sm:h-auto rounded-2xl overflow-hidden shadow-card cursor-grab active:cursor-grabbing">
           {/* Photo - clickable to open gallery */}
           <div 
             onClick={handlePhotoClick}
