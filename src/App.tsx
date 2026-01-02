@@ -3,8 +3,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LikesProvider } from "@/context/LikesContext";
+import { isUnlocked } from "@/hooks/useUnlockToken";
 import Index from "./pages/Index";
 import BrowsePage from "./pages/BrowsePage";
 import AuthPage from "./pages/AuthPage";
@@ -14,12 +15,13 @@ import AccountPage from "./pages/AccountPage";
 import AboutPage from "./pages/AboutPage";
 import SafetyPage from "./pages/SafetyPage";
 import NotFound from "./pages/NotFound";
+import UnlockHandler from "./components/UnlockHandler";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  // User starts as not logged in - must verify via WhatsApp
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Check localStorage for unlock status on mount
+  const [isLoggedIn, setIsLoggedIn] = useState(() => isUnlocked());
 
   const handleLogin = () => {
     // Navigate to auth is handled in components
@@ -40,6 +42,7 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <UnlockHandler onUnlock={handleLoginSuccess} />
             <Routes>
               <Route path="/" element={<Index isLoggedIn={isLoggedIn} onLogin={handleLogin} />} />
               <Route path="/browse" element={<BrowsePage isLoggedIn={isLoggedIn} onLogin={handleLogin} />} />
