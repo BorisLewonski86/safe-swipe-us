@@ -6,6 +6,7 @@ import { MessageCircle, Send, ArrowLeft, Verified } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLikes } from "@/context/LikesContext";
+import { ProfileGallery } from "@/components/ProfileGallery";
 
 interface ChatPageProps {
   isLoggedIn: boolean;
@@ -24,6 +25,7 @@ export function ChatPage({ isLoggedIn, onLogin }: ChatPageProps) {
   const [selectedChat, setSelectedChat] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState("");
   const [chatMessages, setChatMessages] = useState<Record<string, Message[]>>({});
+  const [showGallery, setShowGallery] = useState(false);
 
   const selectedProfile = chatProfiles.find(c => c.id === selectedChat);
 
@@ -84,11 +86,16 @@ export function ChatPage({ isLoggedIn, onLogin }: ChatPageProps) {
           <button onClick={() => setSelectedChat(null)} className="p-1">
             <ArrowLeft className="w-5 h-5 text-foreground" />
           </button>
-          <img
-            src={selectedProfile.photos[0]}
-            alt={selectedProfile.name}
-            className="w-10 h-10 rounded-full object-cover"
-          />
+          <button 
+            onClick={() => setShowGallery(true)}
+            className="relative"
+          >
+            <img
+              src={selectedProfile.photos[0]}
+              alt={selectedProfile.name}
+              className="w-10 h-10 rounded-full object-cover hover:ring-2 hover:ring-primary transition-all"
+            />
+          </button>
           <div className="flex-1">
             <div className="flex items-center gap-1">
               <h2 className="font-semibold text-foreground">{selectedProfile.name}</h2>
@@ -97,6 +104,13 @@ export function ChatPage({ isLoggedIn, onLogin }: ChatPageProps) {
             <p className="text-xs text-muted-foreground">Last seen {selectedProfile.lastSeen || "recently"}</p>
           </div>
         </div>
+
+        {/* Profile Gallery Modal */}
+        <ProfileGallery 
+          profile={selectedProfile} 
+          isOpen={showGallery} 
+          onClose={() => setShowGallery(false)} 
+        />
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3 flex flex-col">
