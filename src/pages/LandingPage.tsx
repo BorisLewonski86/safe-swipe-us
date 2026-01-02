@@ -72,20 +72,20 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center pt-20">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center pt-12 md:pt-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-lg text-gray-700 px-4 py-2 rounded-full mb-6 border border-white/40 shadow-sm">
+            {/* Badge - hidden on mobile */}
+            <div className="hidden md:inline-flex items-center gap-2 bg-white/60 backdrop-blur-lg text-gray-700 px-4 py-2 rounded-full mb-6 border border-white/40 shadow-sm">
               <Heart className="w-4 h-4 text-rose-400" />
               <span className="text-sm font-medium">Real people. Real vibes. Real connections.</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 mb-4 leading-tight">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-800 mb-3 md:mb-4 leading-tight">
               Meet real people near you —{" "}
               <span className="bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
                 verified with WhatsApp
@@ -93,15 +93,15 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg sm:text-xl text-gray-600 mb-2 max-w-2xl mx-auto">
+            <p className="text-base sm:text-xl text-gray-600 mb-1 md:mb-2 max-w-2xl mx-auto">
               No fake profiles. Real people only. Verified via WhatsApp.
             </p>
-            <p className="text-sm text-gray-500 mb-8 max-w-2xl mx-auto">
+            <p className="text-sm text-gray-500 mb-5 md:mb-8 max-w-2xl mx-auto">
               See one photo for free. Verify with WhatsApp so we know you're real.
             </p>
 
             {/* CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center sm:items-start mb-12 w-full">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center sm:items-start mb-6 md:mb-12 w-full">
               <div className="flex flex-col items-center w-full sm:w-auto">
                 <Button 
                   variant="whatsapp" 
