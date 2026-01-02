@@ -88,6 +88,7 @@ export function MatchesPage({ isLoggedIn, onLogin }: MatchesPageProps) {
                     src={profile.photos[0]}
                     alt={profile.name}
                     className="w-16 h-16 rounded-xl object-cover"
+                    loading="lazy"
                   />
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold text-foreground">{profile.name}, {profile.age}</h3>
