@@ -136,8 +136,8 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                {/* Header with back button - hidden on mobile */}
-                <div className="hidden sm:flex items-center justify-between mb-4">
+                {/* Header with back button */}
+                <div className="flex items-center justify-between mb-4">
                   <button 
                     onClick={handleBack}
                     className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
@@ -156,19 +156,8 @@ export function BrowsePage({ isLoggedIn, onLogin }: BrowsePageProps) {
                   <div className="w-16" /> {/* Spacer for centering */}
                 </div>
 
-                {/* Mobile back button only */}
-                <div className="flex sm:hidden items-center mb-2">
-                  <button 
-                    onClick={handleBack}
-                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                    <span className="text-sm">Change</span>
-                  </button>
-                </div>
-
-                {/* Cards stack - responsive height */}
-                <div className="relative h-[calc(100vh-180px)] sm:h-[520px] max-h-[600px]">
+                {/* Cards stack */}
+                <div className="relative h-[520px]">
                   {filteredProfiles.slice(currentIndex, currentIndex + 3).map((profile, idx) => (
                     <SwipeableProfileCard
                       key={profile.id}
