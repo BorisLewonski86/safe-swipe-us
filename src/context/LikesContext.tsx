@@ -31,8 +31,7 @@ export function LikesProvider({ children }: { children: ReactNode }) {
       if (prev.find(p => p.id === profile.id)) return prev;
       return [...prev, profile];
     });
-    // Remove from likes after adding to chat
-    removeLike(profile.id);
+    // Keep profile in likes - user can still view photos
   };
 
   return (
