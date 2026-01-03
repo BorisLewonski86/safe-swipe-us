@@ -110,7 +110,7 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
             className={`w-full h-full ${hasMultiplePhotos ? 'cursor-pointer' : ''}`}
           >
             {!imageLoaded && (
-              <Skeleton className="absolute inset-0 w-full h-full bg-muted animate-pulse" />
+              <Skeleton className="absolute inset-0 w-full h-full bg-muted" />
             )}
             <img
               src={profile.photos[0]}
@@ -203,7 +203,7 @@ export const SwipeableProfileCard = forwardRef<HTMLDivElement, SwipeableProfileC
             >
               {/* Photo with blur for non-first photos when not logged in */}
               {!galleryImageLoaded && (
-                <Skeleton className="absolute inset-0 w-full h-full bg-muted animate-pulse" />
+                <Skeleton className="absolute inset-0 w-full h-full bg-muted" />
               )}
               <img
                 src={profile.photos[currentPhotoIndex]}
