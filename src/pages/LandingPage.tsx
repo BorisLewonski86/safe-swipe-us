@@ -40,25 +40,23 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Soft Gradient Background */}
+        {/* Static Soft Gradient Background - no animation for performance */}
         <div className="absolute inset-0">
-          {/* Main animated gradient - peach to pink to lilac */}
+          {/* Main gradient - peach to pink to lilac (static) */}
           <div 
-            className="absolute inset-0 animate-gradient-shift"
+            className="absolute inset-0"
             style={{
               background: `
                 linear-gradient(135deg, 
                   hsl(25, 70%, 92%) 0%, 
-                  hsl(340, 55%, 90%) 25%, 
-                  hsl(280, 40%, 91%) 50%, 
-                  hsl(210, 50%, 92%) 75%, 
+                  hsl(340, 55%, 90%) 35%, 
+                  hsl(280, 40%, 91%) 65%, 
                   hsl(25, 65%, 90%) 100%
                 )
               `,
-              backgroundSize: '400% 400%',
             }}
           />
-          {/* Subtle floating orbs for depth */}
+          {/* Subtle orbs for depth (static) */}
           <div 
             className="absolute inset-0 opacity-60"
             style={{
@@ -142,16 +140,12 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           </motion.div>
         </div>
 
-        {/* Scroll indicator - hidden on mobile */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
+        {/* Scroll indicator - static for performance */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block">
           <div className="w-6 h-10 rounded-full border-2 border-gray-400/40 flex items-start justify-center p-2">
             <div className="w-1.5 h-2.5 bg-gray-400/40 rounded-full" />
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Stats Section */}
